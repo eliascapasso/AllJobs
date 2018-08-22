@@ -43,6 +43,7 @@ public class RegistroActivity extends AppCompatActivity {
             Toast.makeText(this, "Debe ingresar una contraseña", Toast.LENGTH_SHORT).show();
         }
         else{
+            Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
         }

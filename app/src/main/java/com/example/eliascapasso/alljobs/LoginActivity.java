@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void registrar(View view){
-        Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
         Intent registro = new Intent(this, RegistroActivity.class);
         startActivity(registro);
     }

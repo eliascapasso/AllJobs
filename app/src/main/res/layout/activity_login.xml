@@ -28,7 +28,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="Contraseña"
+        android:hint="@string/contrasenia"
         android:inputType="textPassword"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="iniciarSesion"
-        android:text="Iniciar Sesión"
+        android:text="@string/iniciar_sesion"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,6 +103,7 @@
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="10sp"
         app:layout_constraintTop_toBottomOf="@+id/et_pass_login"
-        tools:layout_editor_absoluteX="50dp" />
+        tools:layout_editor_absoluteX="50dp"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>
