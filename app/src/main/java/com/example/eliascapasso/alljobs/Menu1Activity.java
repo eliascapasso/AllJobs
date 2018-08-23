@@ -31,11 +31,13 @@ public class Menu1Activity extends AppCompatActivity {
     }
 
     public void btn_empleador(View view){
-        Intent proyectos = new Intent(this, TrabajosActivity.class);
-        proyectos.putExtra("nombreOficio", tv_nombreOficio.getText().toString());
-        startActivity(proyectos);
+        Intent trabajadores = new Intent(this, TrabajadoresActivity.class);
+        trabajadores.putExtra("nombreOficio", tv_nombreOficio.getText().toString());
+        startActivity(trabajadores);
     }
     public void btn_TrabIndependiente(View view){
-
+        Intent trabajos = new Intent(this, TrabajosActivity.class);
+        trabajos.putExtra("nombreOficio", tv_nombreOficio.getText().toString());
+        startActivity(trabajos);
     }
 }

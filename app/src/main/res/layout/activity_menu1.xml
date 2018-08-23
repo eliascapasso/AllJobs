@@ -30,6 +30,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
+        android:onClick="btn_TrabIndependiente"
         android:text="Trabajador independiente"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
