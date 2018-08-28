@@ -30,12 +30,13 @@ public class LoginActivity extends AppCompatActivity {
         if(email.length() == 0){
             Toast.makeText(this, "Debe ingresar un Email", Toast.LENGTH_SHORT).show();
         }
-        if(pass.length() == 0){
+        else if(pass.length() == 0){
             Toast.makeText(this, "Debe ingresar una contraseña", Toast.LENGTH_SHORT).show();
         }
-
-        Intent oficios = new Intent(this, OficiosActivity.class);
-        startActivity(oficios);
+        else{
+            Intent oficios = new Intent(this, OficiosActivity.class);
+            startActivity(oficios);
+        }
     }
 
     public void registrar(View view){

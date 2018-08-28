@@ -71,12 +71,14 @@
 
     <TextView
         android:id="@+id/tv_registro_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="238dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
         android:linksClickable="true"
         android:text="¿No dispones de una cuenta AllJobs?"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
@@ -84,14 +86,15 @@
         android:id="@+id/btn_registro"
         style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
-        android:layout_height="51dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="8dp"
         android:onClick="registrar"
         android:text="Crea una cuenta"
         android:textColor="@android:color/black"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_registro_login"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />

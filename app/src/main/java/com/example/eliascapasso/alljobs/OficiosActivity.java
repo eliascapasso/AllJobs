@@ -12,7 +12,7 @@ public class OficiosActivity extends AppCompatActivity {
 
     private ListView lv_oficios;
 
-    private String oficios[] = {"Enfermería", "Plomería", "Mecanica", "Albañilería", "Niñera/o", "Cuidador", "Changarín"};
+    private String oficios[] = {"Enfermería", "Plomería", "Mecánica", "Albañilería", "Niñera/o", "Cuidador", "Changarín"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
