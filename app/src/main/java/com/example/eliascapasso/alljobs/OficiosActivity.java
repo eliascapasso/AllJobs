@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class OficiosActivity extends AppCompatActivity {
@@ -13,6 +12,14 @@ public class OficiosActivity extends AppCompatActivity {
     private ListView lv_oficios;
 
     private String oficios[] = {"Enfermería", "Plomería", "Mecánica", "Albañilería", "Niñera/o", "Cuidador", "Changarín"};
+    private int[] imagenesOficios = {
+            R.drawable.enfermeria,
+            R.drawable.plomeria,
+            R.drawable.mecanica,
+            R.drawable.albanileria,
+            R.drawable.niniera,
+            R.drawable.cuidador,
+            R.drawable.changarin};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +28,7 @@ public class OficiosActivity extends AppCompatActivity {
 
         lv_oficios = (ListView) findViewById(R.id.lv_oficios);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item_oficios, oficios);
-        lv_oficios.setAdapter(adapter);
+        lv_oficios.setAdapter(new AdaptadorOficios(this, oficios, imagenesOficios));
 
         final Intent menu = new Intent(this, Menu1Activity.class);
 

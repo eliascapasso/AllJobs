@@ -31,8 +31,7 @@ public class TrabajosActivity extends AppCompatActivity {
 
         lv_trabajos = (ListView) findViewById(R.id.lv_trabajos);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item_trabajos, oficioElegido);
-        lv_trabajos.setAdapter(adapter);
+        lv_trabajos.setAdapter(new AdaptadorTrabajos(this, oficioElegido));
     }
 
     public void recibirDatos(){
@@ -47,7 +46,7 @@ public class TrabajosActivity extends AppCompatActivity {
             case "Plomería":
                 oficioElegido = trabajosPlomeria;
                 break;
-            case "Mecanica":
+            case "Mecánica":
                 oficioElegido = trabajosMecanica;
                 break;
             case "Albañilería":
