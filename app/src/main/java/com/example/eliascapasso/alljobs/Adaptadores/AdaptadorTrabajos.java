@@ -1,4 +1,4 @@
-package com.example.eliascapasso.alljobs;
+package com.example.eliascapasso.alljobs.Adaptadores;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.eliascapasso.alljobs.R;
 
 public class AdaptadorTrabajos extends BaseAdapter {
     private static LayoutInflater inflater = null;

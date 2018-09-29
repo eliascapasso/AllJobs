@@ -1,9 +1,13 @@
-package com.example.eliascapasso.alljobs;
+package com.example.eliascapasso.alljobs.Actividades;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.eliascapasso.alljobs.Adaptadores.AdaptadorTrabajadores;
+import com.example.eliascapasso.alljobs.Clases.Usuario;
+import com.example.eliascapasso.alljobs.R;
 
 import java.util.ArrayList;
 

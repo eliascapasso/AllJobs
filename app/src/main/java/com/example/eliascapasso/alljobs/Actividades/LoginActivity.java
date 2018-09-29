@@ -1,4 +1,4 @@
-package com.example.eliascapasso.alljobs;
+package com.example.eliascapasso.alljobs.Actividades;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.ArrayList;
+import com.example.eliascapasso.alljobs.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_email, et_pass;
@@ -17,6 +16,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        inicializarAtributos();
+    }
+
+    private void inicializarAtributos(){
         et_email = (EditText)findViewById(R.id.et_email_login);
         et_pass = (EditText)findViewById(R.id.et_pass_login);
     }
@@ -39,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //metodo para el boton CREA UNA CUENTA
     public void registrar(View view){
         Intent registro = new Intent(this, RegistroActivity.class);
         startActivity(registro);

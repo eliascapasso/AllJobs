@@ -1,4 +1,4 @@
-package com.example.eliascapasso.alljobs;
+package com.example.eliascapasso.alljobs.Adaptadores;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.eliascapasso.alljobs.R;
+import com.example.eliascapasso.alljobs.Clases.Usuario;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.eliascapasso.alljobs;
+package com.example.eliascapasso.alljobs.Actividades;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import com.example.eliascapasso.alljobs.R;
 
 public class Menu1Activity extends AppCompatActivity {
 
@@ -17,12 +18,16 @@ public class Menu1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu1);
 
-        tv_nombreOficio = (TextView)findViewById(R.id.tv_nombreOficio);
-
-        recibirDatos();
+        inicializarAtributos();
     }
 
-    public void recibirDatos(){
+    private void inicializarAtributos(){
+        tv_nombreOficio = (TextView)findViewById(R.id.tv_nombreOficio);
+
+        setearNombreOficio();
+    }
+
+    public void setearNombreOficio(){
         Bundle extras = getIntent().getExtras();
         String nombreOficio = extras.getString("nombreOficio");
 
@@ -30,12 +35,13 @@ public class Menu1Activity extends AppCompatActivity {
         tv_nombreOficio.setText(nombreOficio);
     }
 
-    public void btn_empleador(View view){
+    public void listaTrabajadores(View view){
         Intent trabajadores = new Intent(this, TrabajadoresActivity.class);
         trabajadores.putExtra("nombreOficio", tv_nombreOficio.getText().toString());
         startActivity(trabajadores);
     }
-    public void btn_TrabIndependiente(View view){
+
+    public void listaTrabajos(View view){
         Intent trabajos = new Intent(this, TrabajosActivity.class);
         trabajos.putExtra("nombreOficio", tv_nombreOficio.getText().toString());
         startActivity(trabajos);

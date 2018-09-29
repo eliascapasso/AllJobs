@@ -1,4 +1,4 @@
-package com.example.eliascapasso.alljobs;
+package com.example.eliascapasso.alljobs.Actividades;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.eliascapasso.alljobs.R;
 
 public class RegistroActivity extends AppCompatActivity {
     private EditText et_nombreApellido;
@@ -20,6 +21,10 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        inicializarAtributos();
+    }
+
+    private void inicializarAtributos(){
         et_nombreApellido = (EditText)findViewById(R.id.et_nombreApellido);
         et_nombreUsuario = (EditText)findViewById(R.id.et_nombreUsuario);
         et_email = (EditText)findViewById(R.id.et_email);

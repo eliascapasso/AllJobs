@@ -1,10 +1,12 @@
-package com.example.eliascapasso.alljobs;
+package com.example.eliascapasso.alljobs.Actividades;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.eliascapasso.alljobs.Adaptadores.AdaptadorTrabajos;
+import com.example.eliascapasso.alljobs.R;
 
 public class TrabajosActivity extends AppCompatActivity {
 
