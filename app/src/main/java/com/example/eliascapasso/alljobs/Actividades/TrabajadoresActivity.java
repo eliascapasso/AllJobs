@@ -6,7 +6,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.eliascapasso.alljobs.Adaptadores.AdaptadorTrabajadores;
+import com.example.eliascapasso.alljobs.Clases.Trabajador;
 import com.example.eliascapasso.alljobs.Clases.Usuario;
+import com.example.eliascapasso.alljobs.DAO.OficiosRepositorio;
+import com.example.eliascapasso.alljobs.DAO.TrabajadoresRepositorio;
 import com.example.eliascapasso.alljobs.R;
 
 import java.util.ArrayList;
@@ -14,7 +17,10 @@ import java.util.ArrayList;
 public class TrabajadoresActivity extends AppCompatActivity {
 
     private ListView lv_trabajadores;
-    private TextView tv_trabajadores;
+    private TextView tv_oficioTrabajadores;
+    private TrabajadoresRepositorio trabajadoresRepositorio = new TrabajadoresRepositorio();
+    private OficiosRepositorio oficiosRepositorio = new OficiosRepositorio();
+    private ArrayList<Trabajador> listaTrabajadoresActivity = new ArrayList<Trabajador>();
 
     private ArrayList<Usuario> enfermeras = new ArrayList<Usuario>();
     private ArrayList<Usuario> plomeros = new ArrayList<Usuario>();
@@ -30,15 +36,20 @@ public class TrabajadoresActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajadores);
 
-        tv_trabajadores = (TextView)findViewById(R.id.tv_trabajadores);
+        inicializarAtributos();
 
-        inicializarTrabajadores();
+
+
+        //inicializarTrabajadores();
 
         recibirDatos();
 
-        lv_trabajadores = (ListView) findViewById(R.id.lv_trabajadores);
+        lv_trabajadores.setAdapter(new AdaptadorTrabajadores(this, listaTrabajadoresActivity));
+    }
 
-        lv_trabajadores.setAdapter(new AdaptadorTrabajadores(this, oficioElegido));
+    private void inicializarAtributos(){
+        tv_oficioTrabajadores = (TextView)findViewById(R.id.tv_oficioTrabajadores);
+        lv_trabajadores = (ListView) findViewById(R.id.lv_trabajadores);
     }
 
     private void inicializarTrabajadores(){
@@ -72,9 +83,10 @@ public class TrabajadoresActivity extends AppCompatActivity {
 
     public void recibirDatos(){
         Bundle extras = getIntent().getExtras();
-        String nombreOficio = extras.getString("nombreOficio");
+        //String nombreOficio = extras.getString("nombreOficio");
+        int idOficio = extras.getInt("idOficio");
 
-        //inicializa todos los trabajos disponibles para el oficio elegido
+        /*inicializa todos los trabajos disponibles para el oficio elegido
         switch (nombreOficio){
             case "Enfermería":
                 oficioElegido = enfermeras;
@@ -100,7 +112,17 @@ public class TrabajadoresActivity extends AppCompatActivity {
 
                 default: oficioElegido = new ArrayList<>();
         }
+        */
 
-        tv_trabajadores.setText("Lista de " + nombreOficio + "/s disponible/s");
+
+        for(Trabajador t: trabajadoresRepositorio.getListaTrabajadores()){
+            for(int id: t.getIdsOficios()){
+                if(id == idOficio){
+                    listaTrabajadoresActivity.add(t);
+                }
+            }
+        }
+
+        tv_oficioTrabajadores.setText(oficiosRepositorio.buscarPorId(idOficio).getNombreOficio());
     }
 }

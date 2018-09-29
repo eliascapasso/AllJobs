@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.example.eliascapasso.alljobs.Clases.Trabajador;
 import com.example.eliascapasso.alljobs.R;
-import com.example.eliascapasso.alljobs.Clases.Usuario;
 
 import java.util.ArrayList;
 
@@ -17,11 +16,11 @@ public class AdaptadorTrabajadores extends BaseAdapter {
     private static LayoutInflater inflater = null;
 
     Context contexto;
-    ArrayList<Usuario> trabajadores;
+    ArrayList<Trabajador> listaTrabajadores;
 
-    public AdaptadorTrabajadores(Context contexto, ArrayList<Usuario> trabajadores) {
+    public AdaptadorTrabajadores(Context contexto, ArrayList<Trabajador> listaTrabajadores) {
         this.contexto = contexto;
-        this.trabajadores = trabajadores;
+        this.listaTrabajadores = listaTrabajadores;
 
         inflater = (LayoutInflater)contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
     }
@@ -29,22 +28,23 @@ public class AdaptadorTrabajadores extends BaseAdapter {
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
         final View vista = inflater.inflate(R.layout.list_item_trabajadores, null);
+
         TextView nombreTrabajador = (TextView)vista.findViewById(R.id.tv_nombreTrabajador);
         ImageView fotoTrabajador = (ImageView)vista.findViewById(R.id.iv_fotoTrabajador);
-        nombreTrabajador.setText(trabajadores.get(i).getNombreApellido());
-        fotoTrabajador.setImageResource(trabajadores.get(i).getFoto());
+        nombreTrabajador.setText(listaTrabajadores.get(i).getNombreApellido());
+        fotoTrabajador.setImageResource(listaTrabajadores.get(i).getFoto());
 
         return vista;
     }
 
     @Override
     public int getCount() {
-        return trabajadores.size();
+        return listaTrabajadores.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public Trabajador getItem(int i) {
+        return listaTrabajadores.get(i);
     }
 
     @Override

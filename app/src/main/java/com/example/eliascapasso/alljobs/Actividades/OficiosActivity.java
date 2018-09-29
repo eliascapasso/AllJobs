@@ -42,7 +42,8 @@ public class OficiosActivity extends AppCompatActivity {
         lv_oficios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                menu.putExtra("nombreOficio", listaOficios.get(position).getNombreOficio());
+
+                menu.putExtra("idOficio", oficiosRepositorio.getListaOficios().get(position).getId());
                 startActivity(menu);
             }
         });

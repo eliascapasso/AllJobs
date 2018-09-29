@@ -9,4 +9,8 @@ public class Trabajador extends Usuario {
         super(nombreApellido, foto, especialidad); //TODO: setear el resto de atributos del usuario
         this.idsOficios.add(idOficio);
     }
+
+    public ArrayList<Integer> getIdsOficios(){
+        return idsOficios;
+    }
 }

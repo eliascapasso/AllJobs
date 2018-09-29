@@ -20,7 +20,7 @@ public class OficiosRepositorio {
                 R.drawable.changarin};
 
         for(int i = 0 ; i < oficios.length ; i++){
-            LISTA_OFICIOS.add(new Oficio(oficios[i], imagenesOficios[i]));
+            LISTA_OFICIOS.add(new Oficio(i+1, oficios[i], imagenesOficios[i]));
         }
 
         FLAG_INICIALIZADO=true;

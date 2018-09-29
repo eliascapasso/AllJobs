@@ -1,19 +1,18 @@
 package com.example.eliascapasso.alljobs.Clases;
 
 public class Oficio {
-    private static int id = 1;
+    private int idOficio;
     private String nombreOficio;
     private int imagenOficio;
 
-    public Oficio(String nombreOficio, int imagenOficio){
+    public Oficio(int idOficio, String nombreOficio, int imagenOficio){
         this.nombreOficio = nombreOficio;
         this.imagenOficio = imagenOficio;
-
-        id++;
+        this.idOficio = idOficio;
     }
 
     public int getId() {
-        return id;
+        return idOficio;
     }
 
     public String getNombreOficio() {
