@@ -12,12 +12,20 @@ public class Usuario {
     private Date fechaNacieminto;
     private int CP;
     private int foto;
-    private String especialidad;
 
-    public Usuario(String nombreApellido, int foto, String especialidad){
+    /*public Usuario(String nombreApellido, String nombreUsuario, String email, String pass, Date fechaNacieminto, int CP, int foto) {
+        this.nombreApellido = nombreApellido;
+        this.nombreUsuario = nombreUsuario;
+        this.email = email;
+        this.pass = pass;
+        this.fechaNacieminto = fechaNacieminto;
+        this.CP = CP;
+        this.foto = foto;
+    }*///TODO:IMPLEMENTAR
+
+    public Usuario(String nombreApellido, int foto){
         this.nombreApellido = nombreApellido;
         this.foto = foto;
-        this.especialidad = especialidad;
 
         id++;
     }
@@ -40,13 +48,5 @@ public class Usuario {
 
     public void setFoto(int foto) {
         this.foto = foto;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
     }
 }

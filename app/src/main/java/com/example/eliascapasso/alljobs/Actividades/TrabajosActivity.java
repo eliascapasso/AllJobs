@@ -6,65 +6,43 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.eliascapasso.alljobs.Adaptadores.AdaptadorTrabajos;
+import com.example.eliascapasso.alljobs.Clases.Trabajo;
+import com.example.eliascapasso.alljobs.DAO.OficiosRepositorio;
+import com.example.eliascapasso.alljobs.DAO.TrabajadoresRepositorio;
+import com.example.eliascapasso.alljobs.DAO.TrabajosRepositorio;
 import com.example.eliascapasso.alljobs.R;
+
+import java.util.ArrayList;
 
 public class TrabajosActivity extends AppCompatActivity {
 
     private ListView lv_trabajos;
     private TextView tv_trabajos;
-
-    private String trabajosEnfermera [] = {"Se necesita enfermero a tiempo completo", "Busco enfermera", "Necesito inyecciones", "se busca enfermera", "alguna enfermera disponible?"};
-    private String trabajosPlomeria [] = {"Tuberia rota", "Busco plomero", "algun plomero?", "oportunidad en empresa fontanera"};
-    private String trabajosMecanica[] = {"Auto fundido", "busco repuestos de fiat 600", "busco mecanico barato"};
-    private String trabajosAlbañileria[] = {"busco peon", "se busca encargado de obra", "proyecto para la construccion de un puente"};
-    private String trabajosNiniera[] = {"se busca niñera", "necesito niñera", "busco niñera por la mañana", "niñera por la tarde"};
-    private String trabajosCuidador[] = {"Busco cuidador para persona mayor"};
-    private String trabajosChangarin[] = {"cortar el pasto", "pintar rejas", "alguien para pasear mi caniche?", "para pasear 12 perros"};
-    private String oficioElegido[];
+    private TrabajosRepositorio trabajosRepositorio = new TrabajosRepositorio();
+    private OficiosRepositorio oficiosRepositorio = new OficiosRepositorio();
+    private ArrayList<Trabajo> listaTrabajosActivity = new ArrayList<Trabajo>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabajos);
 
-        tv_trabajos = (TextView)findViewById(R.id.tv_trabajos);
+        tv_trabajos = (TextView)findViewById(R.id.tv_tituloListaTrabajos);
 
         recibirDatos();
 
-        lv_trabajos = (ListView) findViewById(R.id.lv_trabajos);
+        lv_trabajos = (ListView) findViewById(R.id.lv_listaTrabajos);
 
-        lv_trabajos.setAdapter(new AdaptadorTrabajos(this, oficioElegido));
+        lv_trabajos.setAdapter(new AdaptadorTrabajos(this, listaTrabajosActivity));
     }
 
     public void recibirDatos(){
         Bundle extras = getIntent().getExtras();
-        String nombreOficio = extras.getString("nombreOficio");
+        int idOficio = extras.getInt("idOficio");
 
-        //inicializa todos los trabajos disponibles para el oficio elegido
-        switch (nombreOficio){
-            case "Enfermería":
-                oficioElegido = trabajosEnfermera;
-                break;
-            case "Plomería":
-                oficioElegido = trabajosPlomeria;
-                break;
-            case "Mecánica":
-                oficioElegido = trabajosMecanica;
-                break;
-            case "Albañilería":
-                oficioElegido = trabajosAlbañileria;
-                break;
-            case "Niñera/o":
-                oficioElegido = trabajosNiniera;
-                break;
-            case "Cuidador":
-                oficioElegido = trabajosCuidador;
-                break;
-            case "Changarín":
-                oficioElegido = trabajosChangarin;
-                break;
-        }
+        listaTrabajosActivity = trabajosRepositorio.buscarPorIdOficio(idOficio);
 
-        tv_trabajos.setText("Trabajos propuestos de " + nombreOficio);
+        //Setea el titulo del oficio de la lista de trabajos
+        tv_trabajos.setText("Trabajos propuestos de " + oficiosRepositorio.buscarPorId(idOficio).getNombreOficio());
     }
 }
