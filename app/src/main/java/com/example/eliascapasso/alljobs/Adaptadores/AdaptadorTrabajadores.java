@@ -27,6 +27,11 @@ public class AdaptadorTrabajadores extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
+
+
+
+
+
         final View vista = inflater.inflate(R.layout.list_item_trabajadores, null);
 
         TextView nombreTrabajador = (TextView)vista.findViewById(R.id.tv_nombreTrabajador);
