@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.eliascapasso.alljobs.Actividades.FilaTrabajadorActivity;
 import com.example.eliascapasso.alljobs.Clases.Trabajador;
 import com.example.eliascapasso.alljobs.R;
 
@@ -27,19 +29,31 @@ public class AdaptadorTrabajadores extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
+        TrabajadorHolder trabajadorHolder;
+        //Convertimos la vista por defecto en el tipo de nuestra vista personalizada
+        FilaTrabajadorActivity view = (FilaTrabajadorActivity) convertView;
+        if(view == null){
+            //Instanciamos la vista y el PedidoHolder
+            trabajadorHolder = new TrabajadorHolder();
+            view = new FilaTrabajadorActivity(contexto);
+            //Instanciamos los recursos
+            trabajadorHolder.tvNombreTrabajador = (TextView)view.findViewById(R.id.tv_nombreTrabajador);
+            trabajadorHolder.ivFotoTrabajador = (ImageView) view.findViewById(R.id.iv_fotoTrabajador);
+            trabajadorHolder.tvTituloEspecialidad = (TextView)view.findViewById(R.id.tv_tituloEspecualidad);
+            //asignamos el viewHolder a la vista
+            view.setTag(trabajadorHolder);
+            //Al cambiar el codigo, debemos llamar nosotros al metodo createViews() de la vista
+            view.createViews();
+        }else{
+            //Si la vista ya existe, recuperamos el viewHolder asociado
+            trabajadorHolder = (TrabajadorHolder) view.getTag();
+        }
 
+        trabajadorHolder.tvNombreTrabajador.setText(listaTrabajadores.get(i).getNombreApellido());
+        trabajadorHolder.tvTituloEspecialidad.setText(listaTrabajadores.get(i).getTituloEspecialidad());
+        trabajadorHolder.ivFotoTrabajador.setImageResource(listaTrabajadores.get(i).getFoto());
 
-
-
-
-        final View vista = inflater.inflate(R.layout.list_item_trabajadores, null);
-
-        TextView nombreTrabajador = (TextView)vista.findViewById(R.id.tv_nombreTrabajador);
-        ImageView fotoTrabajador = (ImageView)vista.findViewById(R.id.iv_fotoTrabajador);
-        nombreTrabajador.setText(listaTrabajadores.get(i).getNombreApellido());
-        fotoTrabajador.setImageResource(listaTrabajadores.get(i).getFoto());
-
-        return vista;
+        return view;
     }
 
     @Override

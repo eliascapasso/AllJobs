@@ -17,4 +17,8 @@ public class Trabajador extends Usuario {
     public ArrayList<Oficio> getListaOficios(){
         return listaOficios;
     }
+
+    public String getTituloEspecialidad() {
+        return tituloEspecialidad;
+    }
 }
