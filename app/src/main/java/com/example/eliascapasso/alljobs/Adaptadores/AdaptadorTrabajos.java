@@ -1,12 +1,12 @@
 package com.example.eliascapasso.alljobs.Adaptadores;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.eliascapasso.alljobs.Actividades.FilaTrabajoActivity;
 import com.example.eliascapasso.alljobs.Clases.Trabajo;
 import com.example.eliascapasso.alljobs.R;
 
@@ -14,31 +14,41 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class AdaptadorTrabajos extends BaseAdapter {
-    private static LayoutInflater inflater = null;
-
     private Context contexto;
     private ArrayList<Trabajo> listaTrabajos;
 
     public AdaptadorTrabajos(Context contexto, ArrayList<Trabajo> listaTrabajos) {
         this.contexto = contexto;
         this.listaTrabajos = listaTrabajos;
-
-        inflater = (LayoutInflater)contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
-        final View vista = inflater.inflate(R.layout.list_item_trabajos, null);
+        TrabajoHolder trabajoHolder;
+        //Convertimos la vista por defecto en el tipo de nuestra vista personalizada
+        FilaTrabajoActivity view = (FilaTrabajoActivity) convertView;
+        if(view == null){
+            //Instanciamos la vista y el PedidoHolder
+            trabajoHolder = new TrabajoHolder();
+            view = new FilaTrabajoActivity(contexto);
+            //Instanciamos los recursos
+            trabajoHolder.tvTituloTrabajo = (TextView)view.findViewById(R.id.tv_tituloTrabajo);
+            trabajoHolder.tvDescripcion = (TextView) view.findViewById(R.id.tv_descripcionTrabajo);
+            trabajoHolder.tvFechaRealizacion = (TextView)view.findViewById(R.id.tv_fechaRealizacion);
+            //asignamos el viewHolder a la vista
+            view.setTag(trabajoHolder);
+            //Al cambiar el codigo, debemos llamar nosotros al metodo createViews() de la vista
+            view.createViews();
+        }else{
+            //Si la vista ya existe, recuperamos el viewHolder asociado
+            trabajoHolder = (TrabajoHolder) view.getTag();
+        }
 
-        TextView tituloTrabajo = (TextView)vista.findViewById(R.id.tv_tituloTrabajo);
-        TextView descripcionTrabajo = (TextView)vista.findViewById(R.id.tv_descripcionTrabajo);
-        TextView fechaRealizacion = (TextView)vista.findViewById(R.id.tv_fechaRealizacion);
+        trabajoHolder.tvTituloTrabajo.setText(listaTrabajos.get(i).getTitulo());
+        trabajoHolder.tvDescripcion.setText(listaTrabajos.get(i).getDescripcion());
+        trabajoHolder.tvFechaRealizacion.setText(new SimpleDateFormat("dd-MM-yyyy").format(listaTrabajos.get(i).getFechaRealizacion()));
 
-        tituloTrabajo.setText(listaTrabajos.get(i).getTitulo());
-        descripcionTrabajo.setText(listaTrabajos.get(i).getDescripcion());
-        fechaRealizacion.setText(new SimpleDateFormat("dd-MM-yyyy").format(listaTrabajos.get(i).getFechaRealizacion()));
-
-        return vista;
+        return view;
     }
 
     @Override

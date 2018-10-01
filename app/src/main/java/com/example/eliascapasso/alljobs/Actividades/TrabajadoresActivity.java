@@ -53,6 +53,6 @@ public class TrabajadoresActivity extends AppCompatActivity {
         }
 
         //Setea el nombre del oficio como titulo
-        tv_oficioTrabajadores.setText(oficiosRepositorio.buscarPorId(idOficio).getNombreOficio());
+        tv_oficioTrabajadores.setText("Trabajadores en " + oficiosRepositorio.buscarPorId(idOficio).getNombreOficio());
     }
 }

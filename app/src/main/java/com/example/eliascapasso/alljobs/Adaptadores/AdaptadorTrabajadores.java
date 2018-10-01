@@ -15,16 +15,12 @@ import com.example.eliascapasso.alljobs.R;
 import java.util.ArrayList;
 
 public class AdaptadorTrabajadores extends BaseAdapter {
-    private static LayoutInflater inflater = null;
-
     Context contexto;
     ArrayList<Trabajador> listaTrabajadores;
 
     public AdaptadorTrabajadores(Context contexto, ArrayList<Trabajador> listaTrabajadores) {
         this.contexto = contexto;
         this.listaTrabajadores = listaTrabajadores;
-
-        inflater = (LayoutInflater)contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override

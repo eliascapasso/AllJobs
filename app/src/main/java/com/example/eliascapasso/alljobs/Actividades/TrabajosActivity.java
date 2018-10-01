@@ -43,6 +43,6 @@ public class TrabajosActivity extends AppCompatActivity {
         listaTrabajosActivity = trabajosRepositorio.buscarPorIdOficio(idOficio);
 
         //Setea el titulo del oficio de la lista de trabajos
-        tv_trabajos.setText("Trabajos propuestos de " + oficiosRepositorio.buscarPorId(idOficio).getNombreOficio());
+        tv_trabajos.setText("Trabajos de " + oficiosRepositorio.buscarPorId(idOficio).getNombreOficio());
     }
 }
