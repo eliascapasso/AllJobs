@@ -65,4 +65,8 @@ public class TrabajadoresRepositorio {
         }
         return null;
     }
+
+    public void agregarTrabajador(Trabajador trabajador){
+        //TODO:Implementar
+    }
 }
