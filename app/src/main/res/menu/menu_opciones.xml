@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/optListaReclamo" android:title="Listar Reclamos"></item>
-    <item android:id="@+id/optNuevoReclamo" android:title="Nuevo Reclamo"></item>
-    <item android:id="@+id/optVerMapa" android:title="Ver en Mapa"></item>
-    <item android:id="@+id/optHeatMap" android:title="HeatMap"></item>
+    <group>
+        <item android:id="@+id/optMiCuenta"
+            android:title="Mi Cuenta"
+            android:icon="@drawable/icono_usuario" />
+        <item android:id="@+id/optAgregarTrabajo"
+            android:title="Agregar Trabajo"
+            android:icon="@drawable/icono_agregartrabajo" />
+    </group>
+    <group>
+        <item android:id="@+id/optCerrarSesion"
+            android:title="Cerrar Sesión"
+            android:icon="@drawable/icono_cerrarsesion"/>
+    </group>
 </menu>
