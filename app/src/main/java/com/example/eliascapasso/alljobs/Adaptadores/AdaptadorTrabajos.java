@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.eliascapasso.alljobs.Actividades.FilaTrabajoActivity;
-import com.example.eliascapasso.alljobs.Clases.Trabajo;
+import com.example.eliascapasso.alljobs.Modelo.Trabajo;
 import com.example.eliascapasso.alljobs.R;
 
 import java.text.SimpleDateFormat;

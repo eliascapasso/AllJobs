@@ -1,5 +1,5 @@
 package com.example.eliascapasso.alljobs.DAO;
-import com.example.eliascapasso.alljobs.Clases.Trabajador;
+import com.example.eliascapasso.alljobs.Modelo.Trabajador;
 import com.example.eliascapasso.alljobs.R;
 import java.util.ArrayList;
 

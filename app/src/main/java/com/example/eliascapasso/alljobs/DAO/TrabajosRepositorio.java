@@ -1,6 +1,6 @@
 package com.example.eliascapasso.alljobs.DAO;
 
-import com.example.eliascapasso.alljobs.Clases.Trabajo;
+import com.example.eliascapasso.alljobs.Modelo.Trabajo;
 
 import java.util.ArrayList;
 import java.util.Date;

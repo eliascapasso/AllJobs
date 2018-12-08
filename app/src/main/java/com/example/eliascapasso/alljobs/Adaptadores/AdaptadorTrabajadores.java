@@ -1,7 +1,6 @@
 package com.example.eliascapasso.alljobs.Adaptadores;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.eliascapasso.alljobs.Actividades.FilaTrabajadorActivity;
-import com.example.eliascapasso.alljobs.Clases.Trabajador;
+import com.example.eliascapasso.alljobs.Modelo.Trabajador;
 import com.example.eliascapasso.alljobs.R;
 
 import java.util.ArrayList;

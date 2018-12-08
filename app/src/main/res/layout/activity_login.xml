@@ -8,27 +8,31 @@
 
     <TextView
         android:id="@+id/tv_titulo_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="111dp"
+        android:layout_height="164dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
-        android:text="AllJobs"
+        android:layout_marginTop="16dp"
+        android:fontFamily="cursive"
+        android:text="All Jobs"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_dark"
+        android:textSize="66sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_email_login"
+        android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="@string/email"
+        android:hint="Correo electronico"
         android:inputType="textEmailAddress"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_titulo_login" />
 
     <EditText
-        android:id="@+id/et_pass_login"
+        android:id="@+id/txtPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -50,10 +54,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_email_login" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btnInicioSesion"
         style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,7 +76,7 @@
     <TextView
         android:id="@+id/tv_registro_login"
         android:layout_width="173dp"
-        android:layout_height="21dp"
+        android:layout_height="16dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
@@ -81,38 +85,42 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/btnInicioSesion" />
 
     <Button
-        android:id="@+id/btn_registro"
+        android:id="@+id/btnRegistro"
         style="@android:style/Widget.DeviceDefault.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
+        android:layout_width="165dp"
+        android:layout_height="41dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:onClick="registrar"
         android:text="Crea una cuenta"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="10sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tv_registro_login"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/btnInicioSesion"
+        app:layout_constraintVertical_bias="0.439" />
 
     <Button
         android:id="@+id/btn_passOlvidada"
         style="@android:style/Widget.DeviceDefault.Light.Button.Borderless.Small"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
         android:text="¿Olvidaste tu contraseña?"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.211"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_pass_login"
+        app:layout_constraintTop_toBottomOf="@+id/txtPass"
         tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

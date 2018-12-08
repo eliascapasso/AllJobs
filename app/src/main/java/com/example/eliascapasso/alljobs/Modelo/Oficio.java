@@ -1,4 +1,4 @@
-package com.example.eliascapasso.alljobs.Clases;
+package com.example.eliascapasso.alljobs.Modelo;
 
 public class Oficio {
     private int idOficio;

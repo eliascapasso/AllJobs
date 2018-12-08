@@ -1,4 +1,4 @@
-package com.example.eliascapasso.alljobs.Clases;
+package com.example.eliascapasso.alljobs.Modelo;
 
 import java.util.Date;
 

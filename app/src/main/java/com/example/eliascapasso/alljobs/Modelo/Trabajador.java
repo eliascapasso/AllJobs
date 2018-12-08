@@ -1,6 +1,7 @@
-package com.example.eliascapasso.alljobs.Clases;
+package com.example.eliascapasso.alljobs.Modelo;
 
 import java.util.ArrayList;
+
 
 public class Trabajador extends Usuario {
     private ArrayList<Oficio> listaOficios = new ArrayList<Oficio>();

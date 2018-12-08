@@ -6,9 +6,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.eliascapasso.alljobs.Adaptadores.AdaptadorTrabajos;
-import com.example.eliascapasso.alljobs.Clases.Trabajo;
+import com.example.eliascapasso.alljobs.Modelo.Trabajo;
 import com.example.eliascapasso.alljobs.DAO.OficiosRepositorio;
-import com.example.eliascapasso.alljobs.DAO.TrabajadoresRepositorio;
 import com.example.eliascapasso.alljobs.DAO.TrabajosRepositorio;
 import com.example.eliascapasso.alljobs.R;
 

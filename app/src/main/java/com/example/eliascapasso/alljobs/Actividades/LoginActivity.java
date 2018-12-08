@@ -20,8 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void inicializarAtributos(){
-        et_email = (EditText)findViewById(R.id.et_email_login);
-        et_pass = (EditText)findViewById(R.id.et_pass_login);
+        et_email = (EditText)findViewById(R.id.txtEmail);
+        et_pass = (EditText)findViewById(R.id.txtPass);
     }
 
     //metodo para el boton iniciar sesion

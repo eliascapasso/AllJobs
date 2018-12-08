@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.example.eliascapasso.alljobs.Adaptadores.AdaptadorOficios;
-import com.example.eliascapasso.alljobs.Clases.Oficio;
+import com.example.eliascapasso.alljobs.Modelo.Oficio;
 import com.example.eliascapasso.alljobs.DAO.OficiosRepositorio;
 import com.example.eliascapasso.alljobs.R;
 import java.util.ArrayList;

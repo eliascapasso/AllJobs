@@ -25,12 +25,12 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void inicializarAtributos(){
-        et_nombreApellido = (EditText)findViewById(R.id.et_nombreApellido);
-        et_nombreUsuario = (EditText)findViewById(R.id.et_nombreUsuario);
-        et_email = (EditText)findViewById(R.id.et_email);
-        et_pass = (EditText)findViewById(R.id.et_pass);
-        et_nacimiento = (EditText)findViewById(R.id.et_nacimiento);
-        et_codigoPostal = (EditText)findViewById(R.id.et_CP);
+        et_nombreApellido = (EditText)findViewById(R.id.txtApellido);
+        et_nombreUsuario = (EditText)findViewById(R.id.txtNombre);
+        et_email = (EditText)findViewById(R.id.txtEmail);
+        et_pass = (EditText)findViewById(R.id.txtPass);
+        et_nacimiento = (EditText)findViewById(R.id.txtFechaNacimiento);
+        et_codigoPostal = (EditText)findViewById(R.id.txtCodigoPostal);
     }
 
     public void registrar(View view){

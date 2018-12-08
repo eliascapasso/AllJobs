@@ -1,6 +1,5 @@
-package com.example.eliascapasso.alljobs.Clases;
+package com.example.eliascapasso.alljobs.Modelo;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Trabajo {

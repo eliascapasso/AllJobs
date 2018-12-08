@@ -21,23 +21,25 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
+                android:fontFamily="cursive"
                 android:text="AllJobs"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                 android:textColor="@android:color/black"
+                android:textSize="50sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/et_nombreApellido"
+                android:id="@+id/txtApellido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:ems="10"
-                android:hint="Apellido y Nombre"
+                android:hint="Apellido"
                 android:inputType="textPersonName"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -46,37 +48,37 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_titulo_login3" />
 
             <EditText
-                android:id="@+id/et_nombreUsuario"
+                android:id="@+id/txtNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
                 android:ems="10"
-                android:hint="Nombre de usuario"
+                android:hint="Nombre"
                 android:inputType="textPersonName"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_nombreApellido" />
+                app:layout_constraintTop_toBottomOf="@+id/txtApellido" />
 
             <EditText
-                android:id="@+id/et_email"
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
                 android:ems="10"
-                android:hint="Email"
+                android:hint="Correo electronico"
                 android:inputType="textEmailAddress"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_nombreUsuario" />
+                app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
 
             <EditText
-                android:id="@+id/et_pass"
+                android:id="@+id/txtPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -88,10 +90,10 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_email" />
+                app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
             <EditText
-                android:id="@+id/et_nacimiento"
+                android:id="@+id/txtFechaNacimiento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -103,10 +105,10 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_pass" />
+                app:layout_constraintTop_toBottomOf="@+id/txtPass" />
 
             <EditText
-                android:id="@+id/et_CP"
+                android:id="@+id/txtCodigoPostal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -118,15 +120,15 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_nacimiento" />
+                app:layout_constraintTop_toBottomOf="@+id/txtFechaNacimiento" />
 
             <Spinner
-                android:id="@+id/sp_oficioTrabajador"
-                android:layout_width="match_parent"
+                android:id="@+id/spOficios"
+                android:layout_width="371dp"
                 android:layout_height="wrap_content" />
 
             <Button
-                android:id="@+id/btn_registro"
+                android:id="@+id/btnRegistro"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -141,7 +143,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_CP" />
+                app:layout_constraintTop_toBottomOf="@+id/txtCodigoPostal" />
 
         </LinearLayout>
     </ScrollView>
