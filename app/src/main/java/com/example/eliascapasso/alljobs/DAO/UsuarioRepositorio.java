@@ -7,10 +7,10 @@ import com.example.eliascapasso.alljobs.Modelo.Usuario;
 
 import java.util.List;
 
-public class UsuarioRepository {
-    private static UsuarioRepository _REPO= null;
+public class UsuarioRepositorio {
+    private static UsuarioRepositorio _REPO= null;
     private UsuarioDAO usuarioDAO;
-    public UsuarioRepository(Context ctx){
+    public UsuarioRepositorio(Context ctx){
         AppDatabase db = Room.databaseBuilder(ctx,
                 AppDatabase.class, "bd_lab")
                 .fallbackToDestructiveMigration()
@@ -19,8 +19,8 @@ public class UsuarioRepository {
         usuarioDAO = db.usuarioDAO();
     }
 
-    public static UsuarioRepository getInstance(Context ctx){
-        if(_REPO==null) _REPO = new UsuarioRepository(ctx);
+    public static UsuarioRepositorio getInstance(Context ctx){
+        if(_REPO==null) _REPO = new UsuarioRepositorio(ctx);
         return _REPO;
     }
 

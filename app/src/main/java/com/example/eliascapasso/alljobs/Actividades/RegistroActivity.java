@@ -3,21 +3,14 @@ package com.example.eliascapasso.alljobs.Actividades;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.eliascapasso.alljobs.DAO.UsuarioRepository;
+import com.example.eliascapasso.alljobs.DAO.UsuarioRepositorio;
 import com.example.eliascapasso.alljobs.Modelo.Usuario;
 import com.example.eliascapasso.alljobs.R;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class RegistroActivity extends AppCompatActivity {
     private EditText et_nombre;
@@ -26,7 +19,7 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText et_pass;
     private EditText et_nacimiento;
     private Button btnRegistrar;
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepositorio usuarioRepositorio;
     private static int idUsuarioNuevo = 1;
 
     @Override
@@ -34,7 +27,7 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        usuarioRepository = new UsuarioRepository(getApplicationContext());
+        usuarioRepositorio = new UsuarioRepositorio(getApplicationContext());
 
         inicializarAtributos();
     }
@@ -95,7 +88,7 @@ public class RegistroActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Usuario nuevoUsuario = new Usuario(idUsuarioNuevo, apellido, nombre, email, pass, nacimiento);
-                            usuarioRepository.crearUsuario(nuevoUsuario);
+                            usuarioRepositorio.crearUsuario(nuevoUsuario);
                         }
                     });
                 }

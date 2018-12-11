@@ -45,7 +45,7 @@ public class TrabajadoresActivity extends AppCompatActivity {
 
         for(Trabajador t: trabajadoresRepositorio.getListaTrabajadores()){
             for(Oficio o: t.getListaOficios()){
-                if(o.getId() == idOficio){
+                if(o.getIdOficio() == idOficio){
                     listaTrabajadoresActivity.add(t);
                 }
             }

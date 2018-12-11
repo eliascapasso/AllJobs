@@ -10,10 +10,12 @@ import com.example.eliascapasso.alljobs.Modelo.Oficio;
 import com.example.eliascapasso.alljobs.Modelo.Trabajo;
 import com.example.eliascapasso.alljobs.Modelo.Usuario;
 
-@Database(entities = {Usuario.class}, version = 1)
+@Database(entities = {Usuario.class, Trabajo.class, Oficio.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UsuarioDAO usuarioDAO();
+    public abstract TrabajoDAO trabajoDAO();
+    public abstract OficioDAO oficioDAO();
 
     @NonNull
     @Override

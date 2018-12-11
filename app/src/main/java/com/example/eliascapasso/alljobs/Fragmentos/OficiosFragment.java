@@ -56,7 +56,7 @@ public class OficiosFragment extends Fragment{
         lv_oficios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                trabajosActivity.putExtra("idOficio", oficiosRepositorio.getListaOficios().get(position).getId());
+                trabajosActivity.putExtra("idOficio", oficiosRepositorio.getListaOficios().get(position).getIdOficio());
                 startActivity(trabajosActivity);
             }
         });

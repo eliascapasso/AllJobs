@@ -61,6 +61,6 @@ public class AdaptadorOficios extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return getItem(i).getId();
+        return getItem(i).getIdOficio();
     }
 }

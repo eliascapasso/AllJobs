@@ -1,17 +1,31 @@
 package com.example.eliascapasso.alljobs.Modelo;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import java.util.Date;
 
+@Entity(tableName ="Trabajo")
 public class Trabajo {
-    private static int idTrabajo = 0;
-    private Trabajador trabajador;
+
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @ColumnInfo(name = "idTrabajo")
+    private int idTrabajo = 0;
+    @ColumnInfo(name = "descripcionTrabajo")
     private String descripcion;
+    @ColumnInfo(name = "tituloTrabajo")
     private String titulo;
-    private Date fechaRealizacion;
+    @ColumnInfo(name = "fechaTrabajo")
+    private String fechaRealizacion;
+    @ColumnInfo(name = "idEmpleador")
     private int idEmpleador;
+    @ColumnInfo(name = "idOficio")
     private int idOficio;
 
-    public Trabajo(String titulo, String descripcion, Date fechaRealizacion, int idEmpleador, int idOficio){
+    public Trabajo(String titulo, String descripcion, String fechaRealizacion, int idEmpleador, int idOficio){
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaRealizacion = fechaRealizacion;
@@ -21,16 +35,13 @@ public class Trabajo {
         idTrabajo++;
     }
 
-    public static int getIdTrabajo() {
+    @NonNull
+    public int getIdTrabajo() {
         return idTrabajo;
     }
 
-    public void setTrabajador(Trabajador trabajador) {
-        this.trabajador = trabajador;
-    }
-
-    public Trabajador getTrabajador() {
-        return trabajador;
+    public void setIdTrabajo(@NonNull int idTrabajo) {
+        this.idTrabajo = idTrabajo;
     }
 
     public String getDescripcion() {
@@ -49,16 +60,20 @@ public class Trabajo {
         this.titulo = titulo;
     }
 
-    public Date getFechaRealizacion() {
+    public String getFechaRealizacion() {
         return fechaRealizacion;
     }
 
-    public void setFechaRealizacion(Date fechaRealizacion) {
+    public void setFechaRealizacion(String fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
     }
 
     public int getIdEmpleador() {
         return idEmpleador;
+    }
+
+    public void setIdEmpleador(int idEmpleador) {
+        this.idEmpleador = idEmpleador;
     }
 
     public int getIdOficio() {
