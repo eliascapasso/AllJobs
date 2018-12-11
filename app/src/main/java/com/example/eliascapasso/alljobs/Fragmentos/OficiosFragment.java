@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.eliascapasso.alljobs.Actividades.Menu1Activity;
+import com.example.eliascapasso.alljobs.Actividades.TrabajosActivity;
 import com.example.eliascapasso.alljobs.Adaptadores.AdaptadorOficios;
 import com.example.eliascapasso.alljobs.DAO.OficiosRepositorio;
 import com.example.eliascapasso.alljobs.Modelo.Oficio;
@@ -50,14 +51,13 @@ public class OficiosFragment extends Fragment{
     }
 
     private void eligeOficio(View v){
-        final Intent menu = new Intent(v.getContext(), Menu1Activity.class);
+        final Intent trabajosActivity = new Intent(v.getContext(), TrabajosActivity.class);
 
         lv_oficios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                menu.putExtra("idOficio", oficiosRepositorio.getListaOficios().get(position).getId());
-                startActivity(menu);
+                trabajosActivity.putExtra("idOficio", oficiosRepositorio.getListaOficios().get(position).getId());
+                startActivity(trabajosActivity);
             }
         });
     }
