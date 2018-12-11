@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Debe ingresar una contraseña", Toast.LENGTH_SHORT).show();
         }
         else{
-            Intent oficios = new Intent(this, OficiosActivity.class);
+            Intent oficios = new Intent(this, MainActivity.class);
             startActivity(oficios);
         }
     }

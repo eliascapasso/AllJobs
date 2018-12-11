@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group>
-        <item android:id="@+id/optMiCuenta"
-            android:title="Mi Cuenta"
+        <item android:id="@+id/optMiPerfil"
+            android:title="Mi Perfil"
             android:icon="@drawable/icono_usuario" />
-        <item android:id="@+id/optAgregarTrabajo"
-            android:title="Agregar Trabajo"
-            android:icon="@drawable/icono_agregartrabajo" />
-    </group>
-    <group>
+        <item android:id="@+id/optOficios"
+            android:title="Oficios"
+            android:icon="@drawable/icono_oficios"/>
         <item android:id="@+id/optCerrarSesion"
             android:title="Cerrar Sesión"
             android:icon="@drawable/icono_cerrarsesion"/>
-    </group>
 </menu>

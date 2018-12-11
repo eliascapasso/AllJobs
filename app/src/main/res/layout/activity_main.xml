@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -7,13 +8,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Actividades.OficiosActivity">
+    tools:context=".Actividades.MainActivity">
 
     <!-- Layout real de la actividad -->
     <FrameLayout
         android:id="@+id/contenido"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     </FrameLayout>
 
     <!-- Layout del menú lateral (Navigation View) -->

@@ -11,9 +11,10 @@
         android:scaleType="centerCrop" />
 
     <TextView
+        android:id="@+id/ndNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="AllJobs"
+        android:text="NOMBRE DE USUARIO"
         android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
         android:textStyle="bold"
         android:layout_gravity="bottom"
