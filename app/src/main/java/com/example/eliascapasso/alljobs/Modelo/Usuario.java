@@ -1,45 +1,90 @@
 package com.example.eliascapasso.alljobs.Modelo;
 
-import java.util.Date;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+import java.util.Objects;
 
+@Entity(tableName ="Usuario")
 public class Usuario {
-    private static int id = 1;
 
-    private String nombreApellido;
-    private String nombreUsuario;
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @ColumnInfo(name = "idUsuario")
+    private int id;
+
+    @ColumnInfo(name = "apellidoUsuario")
+    private String apellido;
+    @ColumnInfo(name = "nombreUsuario")
+    private String nombre;
+    @ColumnInfo(name = "emailUsuario")
     private String email;
+    @ColumnInfo(name = "passUsuario")
     private String pass;
-    private Date fechaNacieminto;
-    private int CP;
+    @ColumnInfo(name = "fechaNacimientoUsuario")
+    private String fechaNacieminto;
+    @ColumnInfo(name = "fotoUsuario")
     private int foto;
 
-    /*public Usuario(String nombreApellido, String nombreUsuario, String email, String pass, Date fechaNacieminto, int CP, int foto) {
-        this.nombreApellido = nombreApellido;
-        this.nombreUsuario = nombreUsuario;
+    public Usuario(int id, String apellido, String nombre, String email, String pass, String fechaNacieminto) {
+        this.apellido = apellido;
+        this.nombre = nombre;
         this.email = email;
         this.pass = pass;
         this.fechaNacieminto = fechaNacieminto;
-        this.CP = CP;
-        this.foto = foto;
-    }*///TODO:IMPLEMENTAR
-
-    public Usuario(String nombreApellido, int foto){
-        this.nombreApellido = nombreApellido;
-        this.foto = foto;
-
-        id++;
     }
 
-    public static int getId(){
+    public Usuario(){}
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
+    }
+
+    public int getId(){
         return id;
     }
 
-    public String getNombreApellido() {
-        return nombreApellido;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setNombreApellido(String nombreApellido) {
-        this.nombreApellido = nombreApellido;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String getFechaNacieminto() {
+        return fechaNacieminto;
+    }
+
+    public void setFechaNacieminto(String fechaNacieminto) {
+        this.fechaNacieminto = fechaNacieminto;
     }
 
     public int getFoto() {
@@ -48,5 +93,17 @@ public class Usuario {
 
     public void setFoto(int foto) {
         this.foto = foto;
+    }
+
+    public void setId(@NonNull int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(email, usuario.email);
     }
 }

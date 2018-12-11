@@ -10,7 +10,7 @@ public class Trabajador extends Usuario {
     private String tituloEspecialidad;
 
     public Trabajador(Oficio oficio, String nombreApellido, int foto, String especialidad){
-        super(nombreApellido, foto); //TODO: setear el resto de atributos del usuario
+        super(); //TODO: setear el resto de atributos del usuario
         this.listaOficios.add(oficio);
         this.tituloEspecialidad = especialidad;
     }

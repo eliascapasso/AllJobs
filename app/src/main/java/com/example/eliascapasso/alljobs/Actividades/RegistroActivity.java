@@ -8,7 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.eliascapasso.alljobs.DAO.UsuarioRepository;
+import com.example.eliascapasso.alljobs.Modelo.Usuario;
 import com.example.eliascapasso.alljobs.R;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class RegistroActivity extends AppCompatActivity {
     private EditText et_nombre;
@@ -17,11 +26,15 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText et_pass;
     private EditText et_nacimiento;
     private Button btnRegistrar;
+    private UsuarioRepository usuarioRepository;
+    private static int idUsuarioNuevo = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+
+        usuarioRepository = new UsuarioRepository(getApplicationContext());
 
         inicializarAtributos();
     }
@@ -47,11 +60,11 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public boolean registrar(View view){
-        String nombre = et_nombre.getText().toString();
-        String apellido = et_apellido.getText().toString();
-        String email = et_email.getText().toString();
-        String pass = et_pass.getText().toString();
-        String nacimiento = et_nacimiento.getText().toString();
+        final String nombre = et_nombre.getText().toString();
+        final String apellido = et_apellido.getText().toString();
+        final String email = et_email.getText().toString();
+        final String pass = et_pass.getText().toString();
+        final String nacimiento = et_nacimiento.getText().toString();
 
         if(nombre.length() == 0){
             Toast.makeText(this, "Debe ingresar su nombre", Toast.LENGTH_SHORT).show();
@@ -74,7 +87,24 @@ public class RegistroActivity extends AppCompatActivity {
             return false;
         }
         else{
+            //Se almacena el nuevo usuario
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Usuario nuevoUsuario = new Usuario(idUsuarioNuevo, apellido, nombre, email, pass, nacimiento);
+                            usuarioRepository.crearUsuario(nuevoUsuario);
+                        }
+                    });
+                }
+            };
+            Thread unHilo = new Thread(r);
+            unHilo.start();
+
             Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
         }

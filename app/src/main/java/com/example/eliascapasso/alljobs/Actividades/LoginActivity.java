@@ -6,15 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.eliascapasso.alljobs.DAO.UsuarioRepository;
+import com.example.eliascapasso.alljobs.Modelo.Usuario;
 import com.example.eliascapasso.alljobs.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_email, et_pass;
+    private UsuarioRepository usuarioRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        usuarioRepository = new UsuarioRepository(getApplicationContext());
 
         inicializarAtributos();
     }
@@ -37,8 +43,16 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Debe ingresar una contraseña", Toast.LENGTH_SHORT).show();
         }
         else{
-            Intent oficios = new Intent(this, MainActivity.class);
-            startActivity(oficios);
+            //Se chequea que el mail y contraseñas ingresados esten registrados
+            for(Usuario u: usuarioRepository.listarUsuarios()){
+                if(u.getEmail().equals(email)){
+                    Intent mainActivity = new Intent(this, MainActivity.class);
+                    startActivity(mainActivity);
+                }
+                else{
+                    Toast.makeText(this, "No existe registrado el usuario ingresado", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 
