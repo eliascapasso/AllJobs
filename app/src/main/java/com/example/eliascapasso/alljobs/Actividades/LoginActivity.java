@@ -1,9 +1,12 @@
 package com.example.eliascapasso.alljobs.Actividades;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,7 +16,9 @@ import com.example.eliascapasso.alljobs.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_email, et_pass;
+    private CheckBox chkRecordarEmailPass;
     private UsuarioRepositorio usuarioRepositorio;
+    private static String PREFS_KEY = "login_preferences";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,11 @@ public class LoginActivity extends AppCompatActivity {
     private void inicializarAtributos(){
         et_email = (EditText)findViewById(R.id.txtEmail);
         et_pass = (EditText)findViewById(R.id.txtPass);
+        chkRecordarEmailPass = (CheckBox) findViewById(R.id.chkRecordarEmailPass);
+
+        et_email.setText(obtenerLoginSharedPreferencesString(getApplicationContext(),"email"));
+        et_pass.setText(obtenerLoginSharedPreferencesString(getApplicationContext(),"pass"));
+        chkRecordarEmailPass.setChecked(obtenerLoginSharedPreferencesBool(getApplicationContext(), "recordar"));
     }
 
     //metodo para el boton iniciar sesion
@@ -44,16 +54,59 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
             //Se chequea que el mail y contraseñas ingresados esten registrados
-            for(Usuario u: usuarioRepositorio.listarUsuarios()){
-                if(u.getEmail().equals(email) && u.getPass().equals(pass)){
-                    Intent mainActivity = new Intent(this, MainActivity.class);
-                    startActivity(mainActivity);
-                }
-                else{
-                    Toast.makeText(this, "No existe registrado el usuario ingresado o la contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+            if(usuarioRepositorio.listarUsuarios().size() != 0){
+                for(Usuario u: usuarioRepositorio.listarUsuarios()){
+                    if(u.getEmail().equals(email) && u.getPass().equals(pass)){
+
+                        //Preferencias compartidas
+                        if(chkRecordarEmailPass.isChecked()){
+                            guardarLoginSharedPreferences(email, pass);
+                        }
+                        else{
+                            guardarLoginSharedPreferences("", "");
+                        }
+
+                        //Se pasa a la otra actividad
+                        Intent mainActivity = new Intent(this, MainActivity.class);
+                        startActivity(mainActivity);
+                    }
+                    else{
+                        Toast.makeText(this, "No está registrado el usuario ingresado o la contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
+            else{
+                Toast.makeText(this, "No está registrado el usuario ingresado o la contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+            }
+
         }
+    }
+
+    private void guardarLoginSharedPreferences(String email, String pass) {
+        SharedPreferences sharedPref = getSharedPreferences("login_preferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("email", email);
+        editor.putString("pass", pass);
+
+        if(email.equals("") && pass.equals("")){
+            editor.putBoolean("recordar", false);
+        }
+        else{
+            editor.putBoolean("recordar", true);
+        }
+
+        editor.apply();
+        editor.commit();
+    }
+
+    public static String obtenerLoginSharedPreferencesString(Context context, String keyPref) {
+        SharedPreferences preferences = context.getSharedPreferences(PREFS_KEY, MODE_PRIVATE);
+        return  preferences.getString(keyPref, "");
+    }
+
+    public static boolean obtenerLoginSharedPreferencesBool(Context context, String keyPref) {
+        SharedPreferences preferences = context.getSharedPreferences(PREFS_KEY, MODE_PRIVATE);
+        return  preferences.getBoolean(keyPref, false);
     }
 
     //metodo para el boton CREA UNA CUENTA

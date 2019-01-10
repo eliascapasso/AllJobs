@@ -46,7 +46,7 @@ public class AdaptadorTrabajos extends BaseAdapter {
 
         trabajoHolder.tvTituloTrabajo.setText(listaTrabajos.get(i).getTitulo());
         trabajoHolder.tvDescripcion.setText(listaTrabajos.get(i).getDescripcion());
-        trabajoHolder.tvFechaRealizacion.setText(new SimpleDateFormat("dd-MM-yyyy").format(listaTrabajos.get(i).getFechaRealizacion()));
+        //trabajoHolder.tvFechaRealizacion.setText(new SimpleDateFormat("dd-MM-yyyy").format(listaTrabajos.get(i).getFechaRealizacion())); //TODO: Revisar
 
         return view;
     }

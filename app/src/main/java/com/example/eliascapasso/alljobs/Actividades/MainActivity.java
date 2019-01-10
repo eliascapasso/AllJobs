@@ -1,5 +1,7 @@
 package com.example.eliascapasso.alljobs.Actividades;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -9,15 +11,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import com.example.eliascapasso.alljobs.DAO.UsuarioRepositorio;
 import com.example.eliascapasso.alljobs.Fragmentos.ModificarPerfilFragment;
 import com.example.eliascapasso.alljobs.Fragmentos.OficiosFragment;
+import com.example.eliascapasso.alljobs.Modelo.Usuario;
 import com.example.eliascapasso.alljobs.R;
 
 public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener{
 
     private DrawerLayout drawerLayout;
     private NavigationView navView;
+    private TextView nombreApellidoUsuario;
+    private UsuarioRepositorio usuarioRepositorio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +34,44 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         //Handle when activity is recreated like on orientation Change
         shouldDisplayHomeUp();
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        navView = (NavigationView)findViewById(R.id.navview);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        usuarioRepositorio = new UsuarioRepositorio(getApplicationContext());
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navview);
-        if (navigationView != null) {
-            setupNavigationDrawerContent(navigationView);
-        }
-
-        setupNavigationDrawerContent(navigationView);
+        inicializarAtributos();
 
         //Inicia primero el fragmento con los oficios
         setFragment(1);
 
+    }
+
+    private void inicializarAtributos() {
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        navView = (NavigationView)findViewById(R.id.navview);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        if (navView != null) {
+            setupNavigationDrawerContent(navView);
+        }
+
+        setupNavigationDrawerContent(navView);
+
+        nombreApellidoUsuario = (TextView) findViewById(R.id.txtNombreApellidoUsuario);
+    }
+
+    private void setearNombreApellidoNavDrawer() {
+        String email = getFromSharedPreferences("email");
+
+        for(Usuario usuario: usuarioRepositorio.listarUsuarios()){
+            if(usuario.getEmail().equals(email)){
+                //nombreApellidoUsuario.setText(usuario.getApellido() + " " + usuario.getNombre());
+            }
+        }
+    }
+
+    private String getFromSharedPreferences(String clave) {
+        SharedPreferences sharedPreferences = getSharedPreferences("login_preferences", Context.MODE_PRIVATE);
+
+        return sharedPreferences.getString(clave, "");
     }
 
     @Override
@@ -72,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     }
 
     private void setupNavigationDrawerContent(NavigationView navigationView) {
+        setearNombreApellidoNavDrawer();
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
