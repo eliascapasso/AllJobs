@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.eliascapasso.alljobs.Actividades.LoginActivity;
+import com.example.eliascapasso.alljobs.DAO.UsuarioRepositorio;
+import com.example.eliascapasso.alljobs.Modelo.Usuario;
 import com.example.eliascapasso.alljobs.R;
 
 public class ModificarPerfilFragment extends Fragment {
@@ -21,16 +23,21 @@ public class ModificarPerfilFragment extends Fragment {
     private EditText et_nacimiento;
     private Button btnRegistrar;
 
+    private UsuarioRepositorio usuarioRepositorio;
+    private Usuario usuario;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_registro, container, false);
+
+        usuarioRepositorio = new UsuarioRepositorio(getContext());
 
         inicializarAtributos(v);
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                registrar(view);
             }
         });
         return v;
@@ -64,9 +71,16 @@ public class ModificarPerfilFragment extends Fragment {
             return false;
         }
         else{
-            Toast.makeText(getActivity(), "Registro exitoso", Toast.LENGTH_SHORT).show();
-            Intent login = new Intent(getActivity(), LoginActivity.class);
-            startActivity(login);
+            //Se modifica el usuario
+            usuario.setApellido(apellido);
+            usuario.setNombre(nombre);
+            usuario.setEmail(email);
+            usuario.setFechaNacieminto(nacimiento);
+            usuario.setPass(pass);
+
+            usuarioRepositorio.modificarUsuario(usuario);
+
+            Toast.makeText(getActivity(), "Modificación exitosa", Toast.LENGTH_SHORT).show();
         }
         return true;
     }
@@ -78,5 +92,17 @@ public class ModificarPerfilFragment extends Fragment {
         et_pass = (EditText) v.findViewById(R.id.txtPass);
         et_nacimiento = (EditText) v.findViewById(R.id.txtFechaNacimiento);
         btnRegistrar = (Button) v.findViewById(R.id.btnRegistro);
+
+        String emailUsuario = LoginActivity.obtenerLoginSharedPreferencesString(getContext(), "email");
+
+        usuario = usuarioRepositorio.obtenerUsuario(emailUsuario);
+
+        if(usuario != null){
+            et_nombre.setText(usuario.getNombre());
+            et_apellido.setText(usuario.getApellido());
+            et_email.setText(usuario.getEmail());
+            et_nacimiento.setText(usuario.getFechaNacieminto());
+            et_pass.setText(usuario.getPass());
+        }
     }
 }

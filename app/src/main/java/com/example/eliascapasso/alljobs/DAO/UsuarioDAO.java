@@ -18,8 +18,8 @@ public interface UsuarioDAO {
     public void modificarUsuario (Usuario usuario);
     @Delete
     public void eliminarUsuario(Usuario usuario);
-    @Query("SELECT * FROM Usuario WHERE idUsuario = :id")
-    public Usuario obtenerUsuario(int id);
+    @Query("SELECT * FROM Usuario WHERE emailUsuario = :emailUsuario")
+    public Usuario obtenerUsuario(String emailUsuario);
     @Query("SELECT * FROM Usuario")
     public List<Usuario> listarUsaurios();
 }

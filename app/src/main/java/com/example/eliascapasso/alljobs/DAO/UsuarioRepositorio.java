@@ -36,8 +36,8 @@ public class UsuarioRepositorio {
         usuarioDAO.eliminarUsuario(u);
     }
 
-    public Usuario obtenerUsuario(int idUsuario){
-        return usuarioDAO.obtenerUsuario(idUsuario);
+    public Usuario obtenerUsuario(String emailUsuario){
+        return usuarioDAO.obtenerUsuario(emailUsuario);
     }
 
     public List<Usuario> listarUsuarios(){

@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
                 fragmentTransaction = fragmentManager.beginTransaction();
                 ModificarPerfilFragment modificarPerfilFragment = new ModificarPerfilFragment();
                 fragmentTransaction.replace(R.id.contenido, modificarPerfilFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
             case 1:
@@ -147,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
                 fragmentTransaction = fragmentManager.beginTransaction();
                 OficiosFragment oficiosFragment = new OficiosFragment();
                 fragmentTransaction.replace(R.id.contenido, oficiosFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
             case 2:
@@ -154,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
                 fragmentTransaction = fragmentManager.beginTransaction();
                 StarredFragment starredFragment = new StarredFragment();
                 fragmentTransaction.replace(R.id.fragment, starredFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();*/
                 break;
         }

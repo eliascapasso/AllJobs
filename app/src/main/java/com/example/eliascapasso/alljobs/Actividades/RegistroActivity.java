@@ -43,8 +43,6 @@ public class RegistroActivity extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: implementar
-
                 registrar(view);
                 Intent login = new Intent(RegistroActivity.this, LoginActivity.class);
                 startActivity(login);

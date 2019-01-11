@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
             //Se chequea que el mail y contraseñas ingresados esten registrados
+            boolean existeUsuario = false;
             if(usuarioRepositorio.listarUsuarios().size() != 0){
                 for(Usuario u: usuarioRepositorio.listarUsuarios()){
                     if(u.getEmail().equals(email) && u.getPass().equals(pass)){
@@ -69,14 +70,14 @@ public class LoginActivity extends AppCompatActivity {
                         //Se pasa a la otra actividad
                         Intent mainActivity = new Intent(this, MainActivity.class);
                         startActivity(mainActivity);
-                    }
-                    else{
-                        Toast.makeText(this, "No está registrado el usuario ingresado o la contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+
+                        existeUsuario = true;
                     }
                 }
             }
-            else{
-                Toast.makeText(this, "No está registrado el usuario ingresado o la contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+
+            if(!existeUsuario){
+                Toast.makeText(this, "Datos incorrectos", Toast.LENGTH_SHORT).show();
             }
 
         }
