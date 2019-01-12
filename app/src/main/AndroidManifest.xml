@@ -20,7 +20,8 @@
         <activity android:name=".Actividades.Menu1Activity" />
         <activity android:name=".Actividades.TrabajosActivity" />
         <activity android:name=".Actividades.TrabajadoresActivity" />
-        <activity android:name=".Actividades.MainActivity"></activity>
+        <activity android:name=".Actividades.MainActivity" />
+        <activity android:name=".Actividades.PropuestaActivity"></activity>
     </application>
 
 </manifest>

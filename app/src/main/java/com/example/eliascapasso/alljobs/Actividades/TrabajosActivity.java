@@ -1,7 +1,10 @@
 package com.example.eliascapasso.alljobs.Actividades;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,9 +23,10 @@ public class TrabajosActivity extends AppCompatActivity {
     private TextView tv_trabajos;
     private ImageView im_oficio;
 
-    private TrabajosRepositorio trabajosRepositorio = new TrabajosRepositorio();
-    private OficiosRepositorio oficiosRepositorio = new OficiosRepositorio();
-    private ArrayList<Trabajo> listaTrabajosActivity = new ArrayList<Trabajo>();
+    private TrabajosRepositorio trabajosRepositorio;
+    private OficiosRepositorio oficiosRepositorio;
+    private ArrayList<Trabajo> listaTrabajosActivity;
+    private int idOficio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +36,32 @@ public class TrabajosActivity extends AppCompatActivity {
         tv_trabajos = (TextView)findViewById(R.id.tv_tituloListaTrabajos);
         im_oficio = (ImageView)findViewById(R.id.imagenOficio);
 
+        trabajosRepositorio = new TrabajosRepositorio();
+        oficiosRepositorio = new OficiosRepositorio();
+
         recibirDatos();
 
         lv_trabajos = (ListView) findViewById(R.id.lv_listaTrabajos);
+        lv_trabajos.setAdapter(new AdaptadorTrabajos(getApplicationContext(), listaTrabajosActivity));
 
-        lv_trabajos.setAdapter(new AdaptadorTrabajos(this, listaTrabajosActivity));
+        eligeTrabajo();
+    }
+
+    private void eligeTrabajo(){
+        final Intent propuesta = new Intent(this, PropuestaActivity.class);
+
+        lv_trabajos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                propuesta.putExtra("idTrabajo", trabajosRepositorio.buscarPorIdOficio(idOficio).get(position).getIdOficio());
+                startActivity(propuesta);
+            }
+        });
     }
 
     public void recibirDatos(){
         Bundle extras = getIntent().getExtras();
-        int idOficio = extras.getInt("idOficio");
+        idOficio = extras.getInt("idOficio");
 
         listaTrabajosActivity = trabajosRepositorio.buscarPorIdOficio(idOficio);
 
