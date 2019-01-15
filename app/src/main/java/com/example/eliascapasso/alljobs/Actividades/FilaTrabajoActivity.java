@@ -8,7 +8,8 @@ import com.example.eliascapasso.alljobs.Adaptadores.TrabajoHolder;
 
 public class FilaTrabajoActivity extends LinearLayout {
     public TextView tvTituloTrabajo;
-    public TextView tvDescripcion;
+    public TextView tvPrecioMin;
+    public TextView tvPrecioMax;
     public TextView tvFechaRealizacion;
     private TrabajoHolder trabajoHolder;
 
@@ -21,7 +22,8 @@ public class FilaTrabajoActivity extends LinearLayout {
         //Instanciamos los elementos de la vista
         trabajoHolder = (TrabajoHolder) this.getTag();
         tvTituloTrabajo = trabajoHolder.tvTituloTrabajo;
-        tvDescripcion = trabajoHolder.tvDescripcion;
+        tvPrecioMin = trabajoHolder.tvPrecioMin;
+        tvPrecioMax = trabajoHolder.tvPrecioMax;
         tvFechaRealizacion = trabajoHolder.tvFechaRealizacion;
     }
 }

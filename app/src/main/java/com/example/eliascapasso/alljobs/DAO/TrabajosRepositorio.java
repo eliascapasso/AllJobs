@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.example.eliascapasso.alljobs.Modelo.Trabajo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,8 +39,13 @@ public class TrabajosRepositorio {
         trabajoDAO.eliminarTrabajo(trabajo);
     }
 
-    public Trabajo obtenerTrabajo(int id){
-        return trabajoDAO.obtenerTrabajo(id);
+    public Trabajo obtenerTrabajo(int idTrabajo){
+        ArrayList<Trabajo> lista = new ArrayList<>();
+
+        for(Trabajo t: LISTA_TRABAJOS){
+            if(t.getIdTrabajo() == idTrabajo) return t;
+        }
+        return null;
     }
 
     public List<Trabajo> listarTrabajos(){
@@ -50,43 +56,61 @@ public class TrabajosRepositorio {
     private static boolean FLAG_INICIALIZADO = false;
 
     private static void inicializar(){
+        Trabajo t;
         //Enfermeria
-        LISTA_TRABAJOS.add(new Trabajo("Se necesita enfermero a tiempo completo", "", new Date().toString(), 1, 1));
-        LISTA_TRABAJOS.add(new Trabajo("Busco enfermera", "", new Date().toString(), 1, 1));
-        LISTA_TRABAJOS.add(new Trabajo("Necesito inyecciones", "", new Date().toString(), 1, 1));
-        LISTA_TRABAJOS.add(new Trabajo("se busca enfermera", "", new Date().toString(), 1, 1));
-        LISTA_TRABAJOS.add(new Trabajo("alguna enfermera disponible?", "", new Date().toString(), 1, 1));
+        t = new Trabajo(1,
+                        "Se necesita enfermero a tiempo completo",
+                        "",
+                        1000,
+                        6000,
+                        new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(),
+                        1,
+                        1);
+        LISTA_TRABAJOS.add(t);
+        t = new Trabajo(2,
+                        "Busco enfermera",
+                        "",
+                        500,
+                        3000,
+                        new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(),
+                        1,
+                        1);
+        LISTA_TRABAJOS.add(t);
+        t = new Trabajo(3,"Necesito inyecciones", "", 100, 200, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 1);
+        LISTA_TRABAJOS.add(t);
+        LISTA_TRABAJOS.add(new Trabajo(4,"se busca enfermera", "", 1000, 10000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 1));
+        LISTA_TRABAJOS.add(new Trabajo(5,"alguna enfermera disponible?", "", 1500, 13000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 1));
 
         //Plomeria
-        LISTA_TRABAJOS.add(new Trabajo("Tuberia rota", "", new Date().toString(), 1, 2));
-        LISTA_TRABAJOS.add(new Trabajo("Busco plomero", "", new Date().toString(), 1, 2));
-        LISTA_TRABAJOS.add(new Trabajo("algun plomero?", "", new Date().toString(), 1, 2));
-        LISTA_TRABAJOS.add(new Trabajo("oportunidad en empresa fontanera", "", new Date().toString(), 1, 2));
+        LISTA_TRABAJOS.add(new Trabajo(6,"Tuberia rota", "", 100, 2000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 2));
+        LISTA_TRABAJOS.add(new Trabajo(7,"Busco plomero", "", 300, 1000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 2));
+        LISTA_TRABAJOS.add(new Trabajo(8,"algun plomero?", "", 500, 2500, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 2));
+        LISTA_TRABAJOS.add(new Trabajo(9,"oportunidad en empresa fontanera", "", 5000, 10000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 2));
 
         //Mecanica
-        LISTA_TRABAJOS.add(new Trabajo("Auto fundido", "", new Date().toString(), 1, 3));
-        LISTA_TRABAJOS.add(new Trabajo("busco repuestos de fiat 600", "", new Date().toString(), 1, 3));
-        LISTA_TRABAJOS.add(new Trabajo("busco mecanico barato", "", new Date().toString(), 1, 3));
+        LISTA_TRABAJOS.add(new Trabajo(10,"Auto fundido", "", 4000, 12000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 3));
+        LISTA_TRABAJOS.add(new Trabajo(11,"fiat 600, caja de cambios", "", 3000, 5000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 3));
+        LISTA_TRABAJOS.add(new Trabajo(12,"busco mecanico barato", "", 1000, 5000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 3));
 
         //Albañileria
-        LISTA_TRABAJOS.add(new Trabajo("busco peon", "", new Date().toString(), 1, 4));
-        LISTA_TRABAJOS.add(new Trabajo("se busca encargado de obra", "", new Date().toString(), 1, 4));
-        LISTA_TRABAJOS.add(new Trabajo("proyecto para la construccion de un puente", "", new Date().toString(), 1, 4));
+        LISTA_TRABAJOS.add(new Trabajo(13,"busco peon", "", 2000, 10000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 4));
+        LISTA_TRABAJOS.add(new Trabajo(14,"se busca encargado de obra", "", 10000, 15000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 4));
+        LISTA_TRABAJOS.add(new Trabajo(15,"proyecto para la construccion de un puente", "", 50000, 100000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 4));
 
         //Niñera
-        LISTA_TRABAJOS.add(new Trabajo("se busca niñera", "", new Date().toString(), 1, 5));
-        LISTA_TRABAJOS.add(new Trabajo("necesito niñera", "", new Date().toString(), 1, 5));
-        LISTA_TRABAJOS.add(new Trabajo("busco niñera por la mañana", "", new Date().toString(), 1, 5));
-        LISTA_TRABAJOS.add(new Trabajo("niñera por la tarde", "", new Date().toString(), 1, 5));
+        LISTA_TRABAJOS.add(new Trabajo(16,"se busca niñera", "", 500, 1000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 5));
+        LISTA_TRABAJOS.add(new Trabajo(17,"necesito niñera", "", 400, 800,  new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 5));
+        LISTA_TRABAJOS.add(new Trabajo(18,"busco niñera por la mañana", "", 500, 1000,  new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 5));
+        LISTA_TRABAJOS.add(new Trabajo(19,"niñera por la tarde", "", 500, 1500,  new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 5));
 
         //Cuidador
-        LISTA_TRABAJOS.add(new Trabajo("Busco cuidador para persona mayor", "", new Date().toString(), 1, 6));
+        LISTA_TRABAJOS.add(new Trabajo(20,"Busco cuidador para persona mayor", "", 1000, 2000, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 6));
 
         //Changarin
-        LISTA_TRABAJOS.add(new Trabajo("cortar el pasto", "", new Date().toString(), 1, 7));
-        LISTA_TRABAJOS.add(new Trabajo("pintar rejas", "", new Date().toString(), 1, 7));
-        LISTA_TRABAJOS.add(new Trabajo("alguien para pasear mi caniche?", "", new Date().toString(), 1, 7));
-        LISTA_TRABAJOS.add(new Trabajo("para pasear 12 perros", "", new Date().toString(), 1, 7));
+        LISTA_TRABAJOS.add(new Trabajo(21,"cortar el pasto", "", 50, 200, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 7));
+        LISTA_TRABAJOS.add(new Trabajo(22,"pintar rejas", "", 30, 300, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 7));
+        LISTA_TRABAJOS.add(new Trabajo(23,"alguien para pasear mi caniche?", "", 50, 250, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 7));
+        LISTA_TRABAJOS.add(new Trabajo(24,"para pasear 12 perros", "", 100, 950, new SimpleDateFormat("dd-MM-yyyy").format(new Date()).toString(), 1, 7));
 
 
         FLAG_INICIALIZADO=true;

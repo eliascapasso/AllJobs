@@ -13,26 +13,31 @@ public class Trabajo {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "idTrabajo")
-    private int idTrabajo = 0;
+    private int idTrabajo;
     @ColumnInfo(name = "descripcionTrabajo")
     private String descripcion;
     @ColumnInfo(name = "tituloTrabajo")
     private String titulo;
     @ColumnInfo(name = "fechaTrabajo")
     private String fechaRealizacion;
+    @ColumnInfo(name = "precioMin")
+    private int precioMin;
+    @ColumnInfo(name = "precioMax")
+    private int precioMax;
     @ColumnInfo(name = "idEmpleador")
     private int idEmpleador;
     @ColumnInfo(name = "idOficio")
     private int idOficio;
 
-    public Trabajo(String titulo, String descripcion, String fechaRealizacion, int idEmpleador, int idOficio){
+    public Trabajo(int idTrabajo, String titulo, String descripcion, int precioMin, int precioMax, String fechaRealizacion, int idEmpleador, int idOficio){
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaRealizacion = fechaRealizacion;
         this.idEmpleador = idEmpleador;
         this.idOficio = idOficio;
-
-        idTrabajo++;
+        this.precioMin = precioMin;
+        this.precioMax = precioMax;
+        this.idTrabajo = idTrabajo;
     }
 
     @NonNull
@@ -66,6 +71,22 @@ public class Trabajo {
 
     public void setFechaRealizacion(String fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
+    }
+
+    public int getPrecioMin() {
+        return precioMin;
+    }
+
+    public void setPrecioMin(int precioMin) {
+        this.precioMin = precioMin;
+    }
+
+    public int getPrecioMax() {
+        return precioMax;
+    }
+
+    public void setPrecioMax(int precioMax) {
+        this.precioMax = precioMax;
     }
 
     public int getIdEmpleador() {

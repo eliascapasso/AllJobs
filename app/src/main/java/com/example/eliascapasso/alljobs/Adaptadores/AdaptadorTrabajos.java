@@ -33,7 +33,8 @@ public class AdaptadorTrabajos extends BaseAdapter {
             view = new FilaTrabajoActivity(contexto);
             //Instanciamos los recursos
             trabajoHolder.tvTituloTrabajo = (TextView)view.findViewById(R.id.tv_tituloTrabajo);
-            trabajoHolder.tvDescripcion = (TextView) view.findViewById(R.id.tv_descripcionTrabajo);
+            trabajoHolder.tvPrecioMin = (TextView) view.findViewById(R.id.txtPrecioMin);
+            trabajoHolder.tvPrecioMax = (TextView) view.findViewById(R.id.txtPrecioMax);
             trabajoHolder.tvFechaRealizacion = (TextView)view.findViewById(R.id.tv_fechaRealizacion);
             //asignamos el viewHolder a la vista
             view.setTag(trabajoHolder);
@@ -45,8 +46,9 @@ public class AdaptadorTrabajos extends BaseAdapter {
         }
 
         trabajoHolder.tvTituloTrabajo.setText(listaTrabajos.get(i).getTitulo());
-        trabajoHolder.tvDescripcion.setText(listaTrabajos.get(i).getDescripcion());
-        //trabajoHolder.tvFechaRealizacion.setText(new SimpleDateFormat("dd-MM-yyyy").format(listaTrabajos.get(i).getFechaRealizacion())); //TODO: Revisar
+        trabajoHolder.tvPrecioMin.setText("$" + Integer.toString(listaTrabajos.get(i).getPrecioMin()));
+        trabajoHolder.tvPrecioMax.setText("$" + Integer.toString(listaTrabajos.get(i).getPrecioMax()));
+        trabajoHolder.tvFechaRealizacion.setText(listaTrabajos.get(i).getFechaRealizacion());
 
         return view;
     }

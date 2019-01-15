@@ -53,7 +53,7 @@ public class TrabajosActivity extends AppCompatActivity {
         lv_trabajos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                propuesta.putExtra("idTrabajo", trabajosRepositorio.buscarPorIdOficio(idOficio).get(position).getIdOficio());
+                propuesta.putExtra("idTrabajo", trabajosRepositorio.buscarPorIdOficio(idOficio).get(position).getIdTrabajo());
                 startActivity(propuesta);
             }
         });

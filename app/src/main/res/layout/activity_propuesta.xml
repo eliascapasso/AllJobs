@@ -6,4 +6,112 @@
     android:layout_height="match_parent"
     tools:context=".Actividades.PropuestaActivity">
 
+    <TextView
+        android:id="@+id/txtTituloTrabajo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Titulo trabajo"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Descripción:"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloTrabajo" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Presupuesto:"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescirpcionTrabajo" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Propuesta:"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/txtDescirpcionTrabajo"
+        android:layout_width="354dp"
+        android:layout_height="224dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:text="[Aqui va la descripcion]"
+        android:textAlignment="textStart"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView" />
+
+    <SeekBar
+        android:id="@+id/seekPresupuesto"
+        android:layout_width="137dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescirpcionTrabajo" />
+
+    <TextView
+        android:id="@+id/txtPresupuesto"
+        android:layout_width="55dp"
+        android:layout_height="17dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="$0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toEndOf="@+id/seekPresupuesto"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescirpcionTrabajo" />
+
+    <EditText
+        android:id="@+id/txtPropuesta"
+        android:layout_width="360dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <Button
+        android:id="@+id/btnEnviarPropuesta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:elevation="0dp"
+        android:text="Enviar propuesta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPropuesta" />
+
 </android.support.constraint.ConstraintLayout>
