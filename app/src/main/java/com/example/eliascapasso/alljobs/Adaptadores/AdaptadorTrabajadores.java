@@ -46,7 +46,7 @@ public class AdaptadorTrabajadores extends BaseAdapter {
 
         trabajadorHolder.tvNombreTrabajador.setText(listaTrabajadores.get(i).getApellido()); //TODO: Cambiar
         trabajadorHolder.tvTituloEspecialidad.setText(listaTrabajadores.get(i).getTituloEspecialidad());
-        trabajadorHolder.ivFotoTrabajador.setImageResource(listaTrabajadores.get(i).getFoto());
+        //trabajadorHolder.ivFotoTrabajador.setImageResource(listaTrabajadores.get(i).getPathFoto());
 
         return view;
     }

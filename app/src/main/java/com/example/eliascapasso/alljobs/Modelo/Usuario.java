@@ -24,8 +24,8 @@ public class Usuario {
     private String pass;
     @ColumnInfo(name = "fechaNacimientoUsuario")
     private String fechaNacieminto;
-    @ColumnInfo(name = "fotoUsuario")
-    private int foto;
+    @ColumnInfo(name = "pathFotoUsuario")
+    private String pathFoto;
 
     public Usuario(int id, String apellido, String nombre, String email, String pass, String fechaNacieminto) {
         this.apellido = apellido;
@@ -87,12 +87,12 @@ public class Usuario {
         this.fechaNacieminto = fechaNacieminto;
     }
 
-    public int getFoto() {
-        return foto;
+    public String getPathFoto() {
+        return pathFoto;
     }
 
-    public void setFoto(int foto) {
-        this.foto = foto;
+    public void setPathFoto(String pathFoto) {
+        this.pathFoto = pathFoto;
     }
 
     public void setId(@NonNull int id) {

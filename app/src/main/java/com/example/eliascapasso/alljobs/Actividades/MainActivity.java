@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,20 +43,23 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         //Inicia primero el fragmento con los oficios
         setFragment(1);
 
+        setupNavigationDrawerContent(navView);
+
+        setearNombreApellidoNavDrawer();
+
     }
 
     private void inicializarAtributos() {
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navView = (NavigationView)findViewById(R.id.navview);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navview);
+        View hView = navigationView.getHeaderView(0);
+        nombreApellidoUsuario = (TextView) hView.findViewById(R.id.txtNombreApellidoUsuario);
 
         if (navView != null) {
             setupNavigationDrawerContent(navView);
         }
-
-        setupNavigationDrawerContent(navView);
-
-        nombreApellidoUsuario = (TextView) findViewById(R.id.txtNombreApellidoUsuario);
     }
 
     private void setearNombreApellidoNavDrawer() {
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
         for(Usuario usuario: usuarioRepositorio.listarUsuarios()){
             if(usuario.getEmail().equals(email)){
-                //nombreApellidoUsuario.setText(usuario.getApellido() + " " + usuario.getNombre());
+                nombreApellidoUsuario.setText(usuario.getApellido() + " " + usuario.getNombre());
             }
         }
     }
@@ -103,8 +107,6 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     }
 
     private void setupNavigationDrawerContent(NavigationView navigationView) {
-        setearNombreApellidoNavDrawer();
-
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
