@@ -29,6 +29,8 @@ public class Trabajo {
     @ColumnInfo(name = "idOficio")
     private int idOficio;
 
+
+
     public Trabajo(int idTrabajo, String titulo, String descripcion, int precioMin, int precioMax, String fechaRealizacion, int idEmpleador, int idOficio){
         this.titulo = titulo;
         this.descripcion = descripcion;
