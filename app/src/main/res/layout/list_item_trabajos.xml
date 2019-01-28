@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="117dp" />
+        app:layout_constraintGuide_begin="119dp" />
 
     <TextView
         android:id="@+id/tv_tituloTrabajo"
@@ -45,8 +45,8 @@
         android:text="Fecha de realizacion"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_mapa"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtPrecioMin"
@@ -79,4 +79,12 @@
         android:text="-"
         app:layout_constraintEnd_toStartOf="@+id/txtPrecioMax"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <Button
+        android:id="@+id/btn_mapa"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="ver ubicación"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrecioMax"
+        tools:layout_editor_absoluteX="242dp" />
 </android.support.constraint.ConstraintLayout>
