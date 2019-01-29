@@ -25,8 +25,13 @@ public class AdaptadorTrabajos extends BaseAdapter {
     }
 
     private OnMapaListener listenerOnMapa;
+
     public interface OnMapaListener {
         public void mostrarMapa(int id);
+    }
+
+    public void setOnMapaListener(OnMapaListener listener){
+        listenerOnMapa = listener;
     }
 
     @Override
@@ -61,6 +66,7 @@ public class AdaptadorTrabajos extends BaseAdapter {
 
         Trabajo aux = getItem(i);
         trabajoHolder.btnMapa.setTag(aux.getIdTrabajo());
+
         trabajoHolder.btnMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

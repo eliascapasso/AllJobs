@@ -1,12 +1,19 @@
-package com.example.eliascapasso.alljobs.Actividades;
+package com.example.eliascapasso.alljobs.Fragmentos;
 
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-
+import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 
 import com.example.eliascapasso.alljobs.Adaptadores.AdaptadorTrabajos;
@@ -23,14 +30,16 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,  AdaptadorTrabajos.OnMapaListener {
+public class MapFragment extends SupportMapFragment implements OnMapReadyCallback,  AdaptadorTrabajos.OnMapaListener {
 
     private static final int UBICACION = 1;
-
-
+    private static final int REQUEST_ACCESS_FINE_LOCATION = 1;
+    private static final int HEATMAP = 4;
+    private static String[] PERMISSIONS_MAPS = {Manifest.permission.ACCESS_FINE_LOCATION};
     private GoogleMap miMapa;
     private int tipoMapa=1;
     private TrabajoDAO trabajoDAO;
@@ -41,15 +50,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        tipoMapa = 0;
+        Bundle argumentos = getArguments();
+        if(argumentos !=null) {
+            tipoMapa = argumentos .getInt("tipo_mapa",0);
+        }
+        getMapAsync(this);
+        return rootView;
     }
-
 
     /**
      * Manipulates the map once available.
@@ -92,6 +102,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //onMapReady(mMap);
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch ( requestCode ) {
+            case REQUEST_ACCESS_FINE_LOCATION: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted
+                    if (ContextCompat.checkSelfPermission(getContext(),
+                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED )
+                        miMapa.setMyLocationEnabled(true);
+                }
+                break;
+            }
+        }
+    }
+
+    public static void verificarPermisoMapa(FragmentActivity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_MAPS,
+                    REQUEST_ACCESS_FINE_LOCATION
+            );
+        }
     }
 
 
