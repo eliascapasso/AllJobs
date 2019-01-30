@@ -48,7 +48,7 @@ public class MapActivity extends AppCompatActivity implements AdaptadorTrabajos.
         fragmentTransaction = fragmentManager.beginTransaction();
 
         // setear los parametros tipo_mapa y idTrabajo en el Bundle args
-        args.putInt("tipo_mapa", 3);
+        args.putInt("tipo_mapa", 1);
         args.putInt("idTrabajo", id);
         f.setArguments(args);
         fragmentTransaction.replace(R.id.contenidoMapa, f);
