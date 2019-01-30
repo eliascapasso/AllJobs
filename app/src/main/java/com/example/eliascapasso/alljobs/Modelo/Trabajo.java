@@ -28,8 +28,13 @@ public class Trabajo {
     private int idEmpleador;
     @ColumnInfo(name = "idOficio")
     private int idOficio;
+    @ColumnInfo(name = "latitud")
+    private Double latitud;
+    @ColumnInfo(name = "longitud")
+    private Double longitud;
 
-    public Trabajo(int idTrabajo, String titulo, String descripcion, int precioMin, int precioMax, String fechaRealizacion, int idEmpleador, int idOficio){
+
+    public Trabajo(int idTrabajo, String titulo, String descripcion, int precioMin, int precioMax, String fechaRealizacion, int idEmpleador, int idOficio, Double latitud, Double longitud){
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaRealizacion = fechaRealizacion;
@@ -38,6 +43,8 @@ public class Trabajo {
         this.precioMin = precioMin;
         this.precioMax = precioMax;
         this.idTrabajo = idTrabajo;
+        this.latitud = latitud;
+        this.longitud=longitud;
     }
 
     @NonNull
@@ -103,5 +110,23 @@ public class Trabajo {
 
     public void setIdOficio(int idOficio) {
         this.idOficio = idOficio;
+    }
+
+
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
     }
 }

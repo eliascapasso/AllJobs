@@ -4,4 +4,5 @@
     <string name="email">Email</string>
     <string name="contrasenia">Contraseña</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

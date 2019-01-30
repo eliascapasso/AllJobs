@@ -1,6 +1,8 @@
 package com.example.eliascapasso.alljobs.Actividades;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.eliascapasso.alljobs.Adaptadores.AdaptadorTrabajos;
+import com.example.eliascapasso.alljobs.Fragmentos.MapFragment;
 import com.example.eliascapasso.alljobs.Modelo.Trabajo;
 import com.example.eliascapasso.alljobs.DAO.OficiosRepositorio;
 import com.example.eliascapasso.alljobs.DAO.TrabajosRepositorio;
@@ -42,7 +45,9 @@ public class TrabajosActivity extends AppCompatActivity {
         recibirDatos();
 
         lv_trabajos = (ListView) findViewById(R.id.lv_listaTrabajos);
-        lv_trabajos.setAdapter(new AdaptadorTrabajos(getApplicationContext(), listaTrabajosActivity));
+        AdaptadorTrabajos adaptadorTrabajos = new AdaptadorTrabajos(getApplicationContext(), listaTrabajosActivity);
+        adaptadorTrabajos.setOnMapaListener(mapaAdapterManager);
+        lv_trabajos.setAdapter(adaptadorTrabajos);
 
         eligeTrabajo();
     }
@@ -93,4 +98,13 @@ public class TrabajosActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    AdaptadorTrabajos.OnMapaListener mapaAdapterManager = new AdaptadorTrabajos.OnMapaListener(){
+        @Override
+        public void mostrarMapa(int id) {
+            Intent mapa = new Intent(TrabajosActivity.this, MapActivity.class);
+            mapa.putExtra("idTrabajo", id);
+            startActivity(mapa);
+        }
+    };
 }
