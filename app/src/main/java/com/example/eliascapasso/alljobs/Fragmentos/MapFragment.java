@@ -14,23 +14,19 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
-import com.example.eliascapasso.alljobs.Adaptadores.AdaptadorTrabajos;
 import com.example.eliascapasso.alljobs.DAO.TrabajoDAO;
+import com.example.eliascapasso.alljobs.DAO.TrabajosRepositorio;
 import com.example.eliascapasso.alljobs.Modelo.Trabajo;
-import com.example.eliascapasso.alljobs.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,16 +38,16 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private static String[] PERMISSIONS_MAPS = {Manifest.permission.ACCESS_FINE_LOCATION};
     private GoogleMap miMapa;
     private int tipoMapa=1;
-    private TrabajoDAO trabajoDAO;
+    private TrabajosRepositorio trabajosRepositorio;
     private List<Trabajo> listaTrabajo;
     private Trabajo trabajo;
-
-
-    private GoogleMap mMap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
+
+        trabajosRepositorio = new TrabajosRepositorio(getContext());
+
         tipoMapa = 0;
         Bundle argumentos = getArguments();
         if(argumentos !=null) {
@@ -72,12 +68,9 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        miMapa = googleMap;
+        UiSettings settings = miMapa.getUiSettings();
+        settings.setZoomControlsEnabled(true);
 
 
         // Enabling MyLocation Layer of Google Map
@@ -94,9 +87,12 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             verificarPermisoMapa(getActivity());
         }
 
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        miMapa.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        miMapa.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         tipoMapaSeleccion(tipoMapa);
-
     }
 
 
@@ -104,22 +100,21 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         switch (tipoMapa) {
 
             case 1:
-                Runnable hiloCargarReclamo=(new Runnable() {
+                Runnable hiloCargarMapa=(new Runnable() {
                     @Override
                     public void run() {
-                        trabajo=trabajoDAO.obtenerTrabajo(getArguments().getInt("idTabajo"));
-                        Message completeMessage= handler.obtainMessage(UBICACION);
+                        int idTrabajo = getArguments().getInt("idTrabajo");
+                        trabajo = trabajosRepositorio.obtenerTrabajo(idTrabajo);
+                        Message completeMessage = handler.obtainMessage(UBICACION);
                         completeMessage.sendToTarget();
                     }
                 });
-                Thread thread= new Thread(hiloCargarReclamo);
+                Thread thread= new Thread(hiloCargarMapa);
                 thread.start();
                 break;
 
         }
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

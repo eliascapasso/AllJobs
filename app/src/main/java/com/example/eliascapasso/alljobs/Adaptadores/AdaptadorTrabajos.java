@@ -35,7 +35,7 @@ public class AdaptadorTrabajos extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup parent) {
+    public View getView(final int i, View convertView, ViewGroup parent) {
         TrabajoHolder trabajoHolder;
         //Convertimos la vista por defecto en el tipo de nuestra vista personalizada
         FilaTrabajoActivity view = (FilaTrabajoActivity) convertView;
@@ -70,7 +70,7 @@ public class AdaptadorTrabajos extends BaseAdapter {
         trabajoHolder.btnMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int id = Integer.valueOf(view.getTag().toString());
+                int id = listaTrabajos.get(i).getIdTrabajo();
                 listenerOnMapa.mostrarMapa(id);
             }
         });
