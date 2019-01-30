@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MapFragment extends SupportMapFragment implements OnMapReadyCallback,  AdaptadorTrabajos.OnMapaListener {
+public class MapFragment extends SupportMapFragment implements OnMapReadyCallback {
 
     private static final int UBICACION = 1;
     private static final int REQUEST_ACCESS_FINE_LOCATION = 1;
@@ -79,30 +79,47 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-    }
 
-    @Override
-    public void mostrarMapa(final int id) {
-       final Bundle args = new Bundle();
-       args.putInt("tipo_mapa_", 1);
-       args.putInt("idTrabajo", id);
-
-
-        Runnable hiloUbicacion=(new Runnable() {
-            @Override
-            public void run() {
-                trabajo=trabajoDAO.obtenerTrabajo(args.getInt("idTrabajo", id));
-                Message completeMessage= handler.obtainMessage(UBICACION);
-                completeMessage.sendToTarget();
+        // Enabling MyLocation Layer of Google Map
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
+            try {
+                miMapa.setMyLocationEnabled(true);
             }
-        });
-        Thread thread2= new Thread(hiloUbicacion);
-        thread2.start();
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            verificarPermisoMapa(getActivity());
+        }
 
 
-        //onMapReady(mMap);
+        tipoMapaSeleccion(tipoMapa);
 
     }
+
+
+    private void tipoMapaSeleccion(int tipoMapa) {
+        switch (tipoMapa) {
+
+            case 1:
+                Runnable hiloCargarReclamo=(new Runnable() {
+                    @Override
+                    public void run() {
+                        trabajo=trabajoDAO.obtenerTrabajo(getArguments().getInt("idTabajo"));
+                        Message completeMessage= handler.obtainMessage(UBICACION);
+                        completeMessage.sendToTarget();
+                    }
+                });
+                Thread thread= new Thread(hiloCargarReclamo);
+                thread.start();
+                break;
+
+        }
+    }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
