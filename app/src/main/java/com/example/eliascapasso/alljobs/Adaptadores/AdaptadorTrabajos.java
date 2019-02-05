@@ -1,6 +1,7 @@
 package com.example.eliascapasso.alljobs.Adaptadores;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.eliascapasso.alljobs.Actividades.FilaTrabajoActivity;
+import com.example.eliascapasso.alljobs.Actividades.PropuestaActivity;
 import com.example.eliascapasso.alljobs.Modelo.Trabajo;
 import com.example.eliascapasso.alljobs.R;
 
@@ -49,6 +51,7 @@ public class AdaptadorTrabajos extends BaseAdapter {
             trabajoHolder.tvPrecioMax = (TextView) view.findViewById(R.id.txtPrecioMax);
             trabajoHolder.tvFechaRealizacion = (TextView)view.findViewById(R.id.tv_fechaRealizacion);
             trabajoHolder.btnMapa = (Button) view.findViewById(R.id.btn_mapa);
+            trabajoHolder.btnPropuesta = (Button) view.findViewById(R.id.btnPropuesta);
 
             //asignamos el viewHolder a la vista
             view.setTag(trabajoHolder);
@@ -66,12 +69,24 @@ public class AdaptadorTrabajos extends BaseAdapter {
 
         Trabajo aux = getItem(i);
         trabajoHolder.btnMapa.setTag(aux.getIdTrabajo());
+        trabajoHolder.btnPropuesta.setTag(aux.getIdTrabajo());
 
         trabajoHolder.btnMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int id = listaTrabajos.get(i).getIdTrabajo();
                 listenerOnMapa.mostrarMapa(id);
+            }
+        });
+
+        trabajoHolder.btnPropuesta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int idTrabajo = listaTrabajos.get(i).getIdTrabajo();
+
+                Intent propuesta = new Intent(contexto, PropuestaActivity.class);
+                propuesta.putExtra("idTrabajo", idTrabajo);
+                contexto.startActivity(propuesta);
             }
         });
 

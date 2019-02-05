@@ -9,4 +9,5 @@ public class TrabajoHolder {
     public TextView tvPrecioMax;
     public TextView tvFechaRealizacion;
     public Button btnMapa;
+    public Button btnPropuesta;
 }

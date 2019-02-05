@@ -1,14 +1,16 @@
 package com.example.eliascapasso.alljobs.Actividades;
 
-import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.eliascapasso.alljobs.DAO.TrabajosRepositorio;
 import com.example.eliascapasso.alljobs.Modelo.Trabajo;
@@ -18,8 +20,8 @@ public class PropuestaActivity extends AppCompatActivity {
     private TextView txtTituloTrabajo;
     private TextView txtDescripcionTrabajo;
     private EditText etPropuesta;
-    private SeekBar seekPresupuesto;
-    private TextView txtPresupuesto;
+    private EditText etPrecio;
+    private TextView txtRangoPrecio;
     private Button btnEnviarPropuesta;
 
     private TrabajosRepositorio trabajosRepositorio;
@@ -32,36 +34,30 @@ public class PropuestaActivity extends AppCompatActivity {
 
         inicializarAtributos();
 
-        setSeekBar();
-    }
-
-    @SuppressLint("NewApi")
-    private void setSeekBar() {
-        txtPresupuesto.setText("$" + trabajo.getPrecioMin());
-
-        //dar valor maximo y minimo a seekbar
-        seekPresupuesto.setMin(trabajo.getPrecioMin());
-        seekPresupuesto.setMax(trabajo.getPrecioMax());
-
-        seekPresupuesto.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        btnEnviarPropuesta.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar,int i,boolean b)
-            {
-                txtPresupuesto.setText("$" + i);
-            }
+            public void onClick(View view) {
+                if(validarPrecio()){
+                    //crea la notificación
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar)
-            {
-                //No hacer nada
-            }
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar)
-            {
-                //No hacer nada
+                    Toast.makeText(getApplicationContext(), "Propuesta enviada con éxito", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Precio inválido", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    boolean validarPrecio(){
+        if(Integer.parseInt(etPrecio.getText().toString()) >= trabajo.getPrecioMin()
+                && Integer.parseInt(etPrecio.getText().toString()) <= trabajo.getPrecioMax()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     private void inicializarAtributos() {
@@ -73,12 +69,29 @@ public class PropuestaActivity extends AppCompatActivity {
 
         txtTituloTrabajo = findViewById(R.id.txtTituloTrabajo);
         txtDescripcionTrabajo = findViewById(R.id.txtDescirpcionTrabajo);
-        etPropuesta = findViewById(R.id.txtPropuesta);
-        seekPresupuesto = findViewById(R.id.seekPresupuesto);
-        txtPresupuesto = findViewById(R.id.txtPresupuesto);
+        etPropuesta = findViewById(R.id.etPropuesta);
+        etPrecio = findViewById(R.id.etPrecio);
+        txtRangoPrecio = findViewById(R.id.txtRangoPrecio);
         btnEnviarPropuesta = findViewById(R.id.btnEnviarPropuesta);
 
         txtTituloTrabajo.setText(trabajo.getTitulo());
+        txtRangoPrecio.setText("Rango: $" + trabajo.getPrecioMin() + " ; $" + trabajo.getPrecioMax());
         txtDescripcionTrabajo.setText(trabajo.getDescripcion());
+    }
+
+    private void createNotificationChannel() {
+        // Crear el canal de notificaciones pero solo para API 26 io superior
+        // dado que NotificationChannel es una clase nueva que no está incluida
+        // en las librerías de soporte qeu brindan compatibilidad hacía atrás
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Estado propuesta: ";
+            String description = "Precio propuesta: ";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("CANAL01", name, importance);
+            channel.setDescription(description);
+            // Registrar el canal en el sistema
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }

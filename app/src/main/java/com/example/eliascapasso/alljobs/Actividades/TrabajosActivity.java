@@ -48,20 +48,6 @@ public class TrabajosActivity extends AppCompatActivity {
         AdaptadorTrabajos adaptadorTrabajos = new AdaptadorTrabajos(getApplicationContext(), listaTrabajosActivity);
         adaptadorTrabajos.setOnMapaListener(mapaAdapterManager);
         lv_trabajos.setAdapter(adaptadorTrabajos);
-
-        eligeTrabajo();
-    }
-
-    private void eligeTrabajo(){
-        final Intent propuesta = new Intent(this, PropuestaActivity.class);
-
-        lv_trabajos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                propuesta.putExtra("idTrabajo", trabajosRepositorio.buscarPorIdOficio(idOficio).get(position).getIdTrabajo());
-                startActivity(propuesta);
-            }
-        });
     }
 
     public void recibirDatos(){
