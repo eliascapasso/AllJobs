@@ -1,7 +1,10 @@
 package com.example.eliascapasso.alljobs.Actividades;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         //Handle when activity is recreated like on orientation Change
         shouldDisplayHomeUp();
 
+        createNotificationChannel();
+
         usuarioRepositorio = new UsuarioRepositorio(getApplicationContext());
 
         inicializarAtributos();
@@ -47,6 +52,22 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
         setearNombreApellidoNavDrawer();
 
+    }
+
+    private void createNotificationChannel() {
+        // Crear el canal de notificaciones pero solo para API 26 io superior
+        // dado que NotificationChannel es una clase nueva que no está incluida
+        // en las librerías de soporte qeu brindan compatibilidad hacía atrás
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Estado propuesta: ";
+            String description = "Precio propuesta: ";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("CANAL01", name, importance);
+            channel.setDescription(description);
+            // Registrar el canal en el sistema
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private void inicializarAtributos() {
