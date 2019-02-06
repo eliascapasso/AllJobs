@@ -1,9 +1,8 @@
 package com.example.eliascapasso.alljobs.Actividades;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
-import android.os.Build;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.eliascapasso.alljobs.DAO.TrabajosRepositorio;
+import com.example.eliascapasso.alljobs.Fragmentos.OficiosFragment;
 import com.example.eliascapasso.alljobs.Modelo.Trabajo;
 import com.example.eliascapasso.alljobs.PropuestaReceiver;
 import com.example.eliascapasso.alljobs.R;
@@ -41,11 +41,12 @@ public class PropuestaActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(validarPrecio()){
                     //crea la notificación
-                    Log.d("APP_LAB02", "Pedido realizado: " + trabajo.getTitulo());
+                    Toast.makeText(getApplicationContext(), "Propuesta enviada con éxito", Toast.LENGTH_SHORT).show();
 
                     gestionTrabajo();
 
-                    Toast.makeText(getApplicationContext(), "Propuesta enviada con éxito", Toast.LENGTH_SHORT).show();
+                    Intent main = new Intent(PropuestaActivity.this, MainActivity.class);
+                    startActivity(main);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Precio inválido", Toast.LENGTH_SHORT).show();
@@ -65,6 +66,12 @@ public class PropuestaActivity extends AppCompatActivity {
     }
 
     private void inicializarAtributos() {
+        BroadcastReceiver br = new PropuestaReceiver();
+        IntentFilter filtro = new IntentFilter();
+        filtro.addAction(PropuestaReceiver.ESTADO_ACEPTADO);
+        getApplication().getApplicationContext()
+                .registerReceiver(br,filtro);
+
         trabajosRepositorio = new TrabajosRepositorio();
 
         Bundle extras = getIntent().getExtras();
@@ -104,9 +111,6 @@ public class PropuestaActivity extends AppCompatActivity {
                     intent.putExtra("idTrabajo",trabajo.getIdTrabajo());
                     intent.setAction(PropuestaReceiver.ESTADO_ACEPTADO);
                     sendBroadcast(intent);
-                }
-                else if(trabajo.getEstado().equals(Trabajo.Estado.ACEPTADO)){
-                    Toast.makeText(getApplicationContext(), "TRABAJO RECHAZADO", Toast.LENGTH_SHORT).show();
                 }
 
                 runOnUiThread(new Runnable() {

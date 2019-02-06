@@ -5,8 +5,12 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.view.SoundEffectConstants;
 import android.widget.Toast;
 
 import com.example.eliascapasso.alljobs.Actividades.PropuestaActivity;
@@ -30,8 +34,6 @@ public class PropuestaReceiver extends BroadcastReceiver{
         unTrabajo = trabajoRepositorio.obtenerTrabajo(idTrabajo);
 
         if(unTrabajo.getEstado().equals(Trabajo.Estado.ACEPTADO)){
-            Toast.makeText(context, "El trabajo " + unTrabajo.getTitulo() + " ha cambiado a estado ACEPTADO", Toast.LENGTH_LONG).show();
-
             Intent trabajoIntent = new Intent(context, PropuestaActivity.class);
             trabajoIntent.putExtra("idTrabajo", idTrabajo);
             trabajoIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -40,10 +42,16 @@ public class PropuestaReceiver extends BroadcastReceiver{
             NotificationManager nManager = (NotificationManager) context
                     .getSystemService(Context.NOTIFICATION_SERVICE);
 
+            Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "CANAL01")
                     .setSmallIcon(android.R.drawable.ic_dialog_info)
                     .setContentTitle("¡El trabajo fue aceptado!")
+                    .setContentText("Fecha de entrega: " + unTrabajo.getFechaRealizacion())
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("Fecha de entrega: " + unTrabajo.getFechaRealizacion()))
                     .setWhen(System.currentTimeMillis())
+                    .setSound(soundUri)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
 

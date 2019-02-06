@@ -2,6 +2,7 @@ package com.example.eliascapasso.alljobs.Adaptadores;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -50,6 +51,7 @@ public class AdaptadorTrabajos extends BaseAdapter {
             trabajoHolder.tvPrecioMin = (TextView) view.findViewById(R.id.txtPrecioMin);
             trabajoHolder.tvPrecioMax = (TextView) view.findViewById(R.id.txtPrecioMax);
             trabajoHolder.tvFechaRealizacion = (TextView)view.findViewById(R.id.tv_fechaRealizacion);
+            trabajoHolder.tvEstado = (TextView)view.findViewById(R.id.txtEstado);
             trabajoHolder.btnMapa = (Button) view.findViewById(R.id.btn_mapa);
             trabajoHolder.btnPropuesta = (Button) view.findViewById(R.id.btnPropuesta);
 
@@ -67,10 +69,28 @@ public class AdaptadorTrabajos extends BaseAdapter {
         trabajoHolder.tvPrecioMax.setText("$" + Integer.toString(listaTrabajos.get(i).getPrecioMax()));
         trabajoHolder.tvFechaRealizacion.setText(listaTrabajos.get(i).getFechaRealizacion());
 
+        if(listaTrabajos.get(i).getEstado().equals(Trabajo.Estado.LISTO)){
+            trabajoHolder.tvEstado.setText("");
+        }
+        else if(listaTrabajos.get(i).getEstado().equals(Trabajo.Estado.ACEPTADO)){
+            trabajoHolder.tvEstado.setText("ASIGNADO");
+            trabajoHolder.tvEstado.setTextColor(Color.RED);
+
+            trabajoHolder.tvTituloTrabajo.setTextColor(Color.GRAY);
+            trabajoHolder.tvPrecioMin.setTextColor(Color.GRAY);
+            trabajoHolder.tvPrecioMax.setTextColor(Color.GRAY);
+            trabajoHolder.tvFechaRealizacion.setTextColor(Color.GRAY);
+            trabajoHolder.btnMapa.setTextColor(Color.GRAY);
+            trabajoHolder.btnPropuesta.setTextColor(Color.GRAY);
+
+            trabajoHolder.btnPropuesta.setEnabled(false);
+        }
+
         Trabajo aux = getItem(i);
         trabajoHolder.btnMapa.setTag(aux.getIdTrabajo());
         trabajoHolder.btnPropuesta.setTag(aux.getIdTrabajo());
 
+        //Boton para ver el mapa
         trabajoHolder.btnMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +99,7 @@ public class AdaptadorTrabajos extends BaseAdapter {
             }
         });
 
+        //Boton para hacer una propuesta
         trabajoHolder.btnPropuesta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

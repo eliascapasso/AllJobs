@@ -4,6 +4,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -59,11 +60,12 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         // dado que NotificationChannel es una clase nueva que no está incluida
         // en las librerías de soporte qeu brindan compatibilidad hacía atrás
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Estado propuesta: ";
-            String description = "Precio propuesta: ";
+            CharSequence name = "Respuesta";
+            String description = "Respuesta a la propuesta del trabajo: ";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("CANAL01", name, importance);
             channel.setDescription(description);
+
             // Registrar el canal en el sistema
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);

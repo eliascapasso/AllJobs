@@ -35,7 +35,7 @@
         <activity android:name=".Actividades.TrabajadoresActivity" />
         <activity android:name=".Actividades.MainActivity" />
         <activity android:name=".Actividades.PropuestaActivity" />
-        <activity android:name=".Actividades.MapaActivity" />
+        <activity android:name=".Actividades.MapActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,6 +44,15 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/. 
         -->
+        <receiver
+            android:name=".PropuestaReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.eliascapasso.alljobs.ESTADO_ACEPTADO" />
+                <action android:name="com.example.eliascapasso.alljobs.ESTADO_LISTO" />
+            </intent-filter>
+        </receiver>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

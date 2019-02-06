@@ -8,6 +8,7 @@ public class TrabajoHolder {
     public TextView tvPrecioMin;
     public TextView tvPrecioMax;
     public TextView tvFechaRealizacion;
+    public TextView tvEstado;
     public Button btnMapa;
     public Button btnPropuesta;
 }
