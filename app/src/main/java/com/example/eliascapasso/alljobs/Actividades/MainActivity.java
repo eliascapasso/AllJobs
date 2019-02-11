@@ -1,8 +1,15 @@
 package com.example.eliascapasso.alljobs.Actividades;
 
+import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.eliascapasso.alljobs.DAO.UsuarioRepositorio;
 import com.example.eliascapasso.alljobs.Fragmentos.ModificarPerfilFragment;
@@ -28,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     private TextView nombreApellidoUsuario;
     private UsuarioRepositorio usuarioRepositorio;
 
+    private static final int INTERVALO = 2000; //2 segundos para salir
+    private long tiempoPrimerClick;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         //Handle when activity is recreated like on orientation Change
         shouldDisplayHomeUp();
+
+        createNotificationChannel();
 
         usuarioRepositorio = new UsuarioRepositorio(getApplicationContext());
 
@@ -47,6 +60,23 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
         setearNombreApellidoNavDrawer();
 
+    }
+
+    private void createNotificationChannel() {
+        // Crear el canal de notificaciones pero solo para API 26 io superior
+        // dado que NotificationChannel es una clase nueva que no está incluida
+        // en las librerías de soporte qeu brindan compatibilidad hacía atrás
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Respuesta";
+            String description = "Respuesta a la propuesta del trabajo: ";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("CANAL01", name, importance);
+            channel.setDescription(description);
+
+            // Registrar el canal en el sistema
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private void inicializarAtributos() {
@@ -154,13 +184,34 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
                 fragmentTransaction.commit();
                 break;
             case 2:
-                /*fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                StarredFragment starredFragment = new StarredFragment();
-                fragmentTransaction.replace(R.id.fragment, starredFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();*/
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Cerrar Sesión");
+                builder.setMessage("¿Seguro que desea cerrar sesión?");
+                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //No hace nada
+                    }
+                });
+                builder.show();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (tiempoPrimerClick + INTERVALO > System.currentTimeMillis()){
+            finishAffinity();
+            return;
+        }else {
+            Toast.makeText(this, "Vuelve a presionar para salir", Toast.LENGTH_SHORT).show();
+        }
+        tiempoPrimerClick = System.currentTimeMillis();
     }
 }

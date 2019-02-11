@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.eliascapasso.alljobs.Actividades.Menu1Activity;
 import com.example.eliascapasso.alljobs.Actividades.TrabajosActivity;
@@ -23,6 +25,7 @@ public class OficiosFragment extends Fragment{
     private ListView lv_oficios;
     private ArrayList<Oficio> listaOficios;
     private OficiosRepositorio oficiosRepositorio;
+    private Button btnNuevoOficio;
 
     public OficiosFragment() {
         // Required empty public constructor
@@ -39,10 +42,18 @@ public class OficiosFragment extends Fragment{
 
         eligeOficio(v);
 
+        btnNuevoOficio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Funcionalidad no implementada", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return v;
     }
 
     private void inicializarAtributos(View v){
+        btnNuevoOficio = v.findViewById(R.id.btnNuevoOficio);
         oficiosRepositorio = new OficiosRepositorio();
         listaOficios = oficiosRepositorio.getListaOficios();
 

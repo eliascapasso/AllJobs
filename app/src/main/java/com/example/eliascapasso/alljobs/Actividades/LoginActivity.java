@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
         et_email.setText(obtenerLoginSharedPreferencesString(getApplicationContext(),"email"));
         et_pass.setText(obtenerLoginSharedPreferencesString(getApplicationContext(),"pass"));
-        chkRecordarEmailPass.setChecked(obtenerLoginSharedPreferencesBool(getApplicationContext(), "recordar"));
+        chkRecordarEmailPass.setChecked(obtenerLoginSharedPreferencesCheckBoxRecordar(getApplicationContext(), "recordar"));
     }
 
     //metodo para el boton iniciar sesion
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
         return  preferences.getString(keyPref, "");
     }
 
-    public static boolean obtenerLoginSharedPreferencesBool(Context context, String keyPref) {
+    public static boolean obtenerLoginSharedPreferencesCheckBoxRecordar(Context context, String keyPref) {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_KEY, MODE_PRIVATE);
         return  preferences.getBoolean(keyPref, false);
     }

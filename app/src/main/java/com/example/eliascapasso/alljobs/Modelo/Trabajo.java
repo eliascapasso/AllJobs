@@ -3,12 +3,16 @@ package com.example.eliascapasso.alljobs.Modelo;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+
+import com.example.eliascapasso.alljobs.DAO.EstadoConverter;
 
 import java.util.Date;
 
 @Entity(tableName ="Trabajo")
 public class Trabajo {
+    public enum Estado {ACEPTADO,LISTO}
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
@@ -32,6 +36,8 @@ public class Trabajo {
     private Double latitud;
     @ColumnInfo(name = "longitud")
     private Double longitud;
+    @TypeConverters(EstadoConverter.class)
+    private Estado estado;
 
 
     public Trabajo(int idTrabajo, String titulo, String descripcion, int precioMin, int precioMax, String fechaRealizacion, int idEmpleador, int idOficio, Double latitud, Double longitud){
@@ -45,6 +51,7 @@ public class Trabajo {
         this.idTrabajo = idTrabajo;
         this.latitud = latitud;
         this.longitud=longitud;
+        this.estado = Estado.LISTO;
     }
 
     @NonNull
@@ -78,6 +85,14 @@ public class Trabajo {
 
     public void setFechaRealizacion(String fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
     public int getPrecioMin() {

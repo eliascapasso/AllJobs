@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:text="Propuesta:"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="18sp"
@@ -66,34 +66,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextView" />
 
-    <SeekBar
-        android:id="@+id/seekPresupuesto"
-        android:layout_width="137dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescirpcionTrabajo" />
-
     <TextView
-        android:id="@+id/txtPresupuesto"
-        android:layout_width="55dp"
-        android:layout_height="17dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/txtRangoPrecio"
+        android:layout_width="157dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="28dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="$0"
+        android:text="Rango: $0 - 0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.161"
-        app:layout_constraintStart_toEndOf="@+id/seekPresupuesto"
+        app:layout_constraintHorizontal_bias="0.368"
+        app:layout_constraintStart_toEndOf="@+id/etPrecio"
         app:layout_constraintTop_toBottomOf="@+id/txtDescirpcionTrabajo" />
 
     <EditText
-        android:id="@+id/txtPropuesta"
+        android:id="@+id/etPropuesta"
         android:layout_width="360dp"
-        android:layout_height="113dp"
+        android:layout_height="123dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:selectAllOnFocus="false"
@@ -112,6 +102,19 @@
         android:text="Enviar propuesta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPropuesta" />
+        app:layout_constraintTop_toBottomOf="@+id/etPropuesta" />
+
+    <EditText
+        android:id="@+id/etPrecio"
+        android:layout_width="70dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="number"
+        android:text="0"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescirpcionTrabajo" />
 
 </android.support.constraint.ConstraintLayout>
