@@ -1,12 +1,15 @@
 package com.example.eliascapasso.alljobs.Actividades;
 
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.eliascapasso.alljobs.DAO.UsuarioRepositorio;
 import com.example.eliascapasso.alljobs.Fragmentos.ModificarPerfilFragment;
@@ -31,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     private NavigationView navView;
     private TextView nombreApellidoUsuario;
     private UsuarioRepositorio usuarioRepositorio;
+
+    private static final int INTERVALO = 2000; //2 segundos para salir
+    private long tiempoPrimerClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,13 +184,34 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
                 fragmentTransaction.commit();
                 break;
             case 2:
-                /*fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                StarredFragment starredFragment = new StarredFragment();
-                fragmentTransaction.replace(R.id.fragment, starredFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();*/
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Cerrar Sesión");
+                builder.setMessage("¿Seguro que desea cerrar sesión?");
+                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //No hace nada
+                    }
+                });
+                builder.show();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (tiempoPrimerClick + INTERVALO > System.currentTimeMillis()){
+            finishAffinity();
+            return;
+        }else {
+            Toast.makeText(this, "Vuelve a presionar para salir", Toast.LENGTH_SHORT).show();
+        }
+        tiempoPrimerClick = System.currentTimeMillis();
     }
 }
