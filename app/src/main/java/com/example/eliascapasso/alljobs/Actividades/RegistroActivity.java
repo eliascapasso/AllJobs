@@ -183,10 +183,13 @@ public class RegistroActivity extends AppCompatActivity {
                 Toast.makeText(this, "Debe ingresar su fecha de nacimiento", Toast.LENGTH_SHORT).show();
                 return false;
             }
+            else if(pathFoto == null){
+                Toast.makeText(this, "Debe ingresar una foto de perfil", Toast.LENGTH_SHORT).show();
+                return false;
+            }
             else{
                 nuevoUsuario = new Usuario(idUsuarioNuevo, apellido, nombre, email, pass, nacimiento);
-
-
+                nuevoUsuario.setPathFoto(pathFoto);
 
                 //Se almacena el nuevo usuario
                 Runnable r = new Runnable() {
