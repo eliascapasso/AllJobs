@@ -25,6 +25,7 @@ public class PropuestaActivity extends AppCompatActivity {
     private EditText etPrecio;
     private TextView txtRangoPrecio;
     private Button btnEnviarPropuesta;
+    private Button btnSalir;
 
     private TrabajosRepositorio trabajosRepositorio;
     private Trabajo trabajo;
@@ -50,6 +51,19 @@ public class PropuestaActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Precio inválido", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        btnSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(trabajo.getEstado().equals(Trabajo.Estado.LISTO)) {
+                    finish();
+                }
+                else if(trabajo.getEstado().equals(Trabajo.Estado.ACEPTADO)){
+                    Intent oficiosActivity = new Intent(PropuestaActivity.this, MainActivity.class);
+                    startActivity(oficiosActivity);
                 }
             }
         });
@@ -84,10 +98,19 @@ public class PropuestaActivity extends AppCompatActivity {
         etPrecio = findViewById(R.id.etPrecio);
         txtRangoPrecio = findViewById(R.id.txtRangoPrecio);
         btnEnviarPropuesta = findViewById(R.id.btnEnviarPropuesta);
+        btnSalir = findViewById(R.id.btnSalir);
 
         txtTituloTrabajo.setText(trabajo.getTitulo());
         txtRangoPrecio.setText("Rango: $" + trabajo.getPrecioMin() + " ; $" + trabajo.getPrecioMax());
         txtDescripcionTrabajo.setText(trabajo.getDescripcion());
+
+        if(trabajo.getEstado().equals(Trabajo.Estado.ACEPTADO)){
+            btnEnviarPropuesta.setEnabled(false);
+            etPrecio.setText(Integer.toString(trabajo.getPrecioPropuesto()));
+            etPrecio.setEnabled(false);
+            etPropuesta.setText(trabajo.getDescripcionPropuesta());
+            etPropuesta.setEnabled(false);
+        }
     }
 
     private void gestionTrabajo(){
@@ -102,6 +125,8 @@ public class PropuestaActivity extends AppCompatActivity {
                 //Aceptar el pedido si el estado actual del trabajo es LISTO
                 if(trabajo.getEstado().equals(Trabajo.Estado.LISTO)){
                     trabajo.setEstado(Trabajo.Estado.ACEPTADO);
+                    trabajo.setDescripcionPropuesta(etPropuesta.getText().toString());
+                    trabajo.setPrecioPropuesto(Integer.parseInt(etPrecio.getText().toString()));
 
                     //Se reinicia el estado cada vez que inicia la app
                     //trabajosRepositorio.modificarTrabajo(trabajo);

@@ -38,6 +38,10 @@ public class Trabajo {
     private Double longitud;
     @TypeConverters(EstadoConverter.class)
     private Estado estado;
+    @ColumnInfo(name = "descripcionPropuesta")
+    private String descripcionPropuesta;
+    @ColumnInfo(name = "precioPropuesto")
+    private int precioPropuesto;
 
 
     public Trabajo(int idTrabajo, String titulo, String descripcion, int precioMin, int precioMax, String fechaRealizacion, int idEmpleador, int idOficio, Double latitud, Double longitud){
@@ -85,6 +89,22 @@ public class Trabajo {
 
     public void setFechaRealizacion(String fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
+    }
+
+    public String getDescripcionPropuesta() {
+        return descripcionPropuesta;
+    }
+
+    public void setDescripcionPropuesta(String descripcionPropuesta) {
+        this.descripcionPropuesta = descripcionPropuesta;
+    }
+
+    public int getPrecioPropuesto() {
+        return precioPropuesto;
+    }
+
+    public void setPrecioPropuesto(int precioPropuesto) {
+        this.precioPropuesto = precioPropuesto;
     }
 
     public Estado getEstado() {
